@@ -17,10 +17,10 @@
        ">
     
     <context:component-scan base-package="com.empresa.proyecto" />
+    <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:annotation-driven />
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
-
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but
     for the index controller we are using ParameterizableViewController, so we must
@@ -47,5 +47,5 @@
           p:viewName="index" />
     <bean name="controladorPrincipal"
         class="com.empresa.proyecto.controlador.controladorPrincipal" />
-
+        
 </beans>
