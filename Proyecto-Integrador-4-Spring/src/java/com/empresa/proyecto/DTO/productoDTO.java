@@ -19,10 +19,9 @@ public class productoDTO {
     private int cod_cat_id;
     private int cod_prov_id;
     private String image;
-    private byte[] image_blob;
     private String[] seleccionEstado = {"A", "X"};
 
-    public productoDTO(int cod_prod, String producto, String descripcion, int precio, int stock, String estado, int cod_cat_id, int cod_prov_id, String image, byte[] image_blob) {
+    public productoDTO(int cod_prod, String producto, String descripcion, int precio, int stock, String estado, int cod_cat_id, int cod_prov_id, String image) {
         this.cod_prod = cod_prod;
         this.producto = producto;
         this.descripcion = descripcion;
@@ -32,7 +31,6 @@ public class productoDTO {
         this.cod_cat_id = cod_cat_id;
         this.cod_prov_id = cod_prov_id;
         this.image = image;
-        this.image_blob = image_blob;
     }
 
     public productoDTO() {
@@ -45,7 +43,6 @@ public class productoDTO {
         this.cod_cat_id = cod_cat_id;
         this.cod_prov_id = cod_prov_id;
         this.image = image;
-        this.image_blob = image_blob;
     }
 
     public int getCod_prod() {
@@ -118,14 +115,6 @@ public class productoDTO {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public byte[] getImage_blob() {
-        return image_blob;
-    }
-
-    public void setImage_blob(byte[] image_blob) {
-        this.image_blob = image_blob;
     }
 
     public String[] getSeleccionEstado() {
