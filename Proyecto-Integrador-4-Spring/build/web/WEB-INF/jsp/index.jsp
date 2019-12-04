@@ -83,7 +83,7 @@
                                              <div class="row row-cols-1 row-cols-md-3">
                                                  <c:forEach items="${cat}" var="categoria">
                                                      <div class="col mb-4">
-                                                         <a href="#">
+                                                         <a href="categorias.htm?cod_cat=<c:out value="${categoria.cod_cat}"/>">
                                                              <div class="card h-100">
                                                                  <img src="<c:out value="${categoria.image}" />" class="card-img-top" style="height: 400px;" alt="...">
                                                                  <div class="card-body">

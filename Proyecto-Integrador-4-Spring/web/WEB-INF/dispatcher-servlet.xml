@@ -30,6 +30,7 @@
         <property name="mappings">
             <props>
                 <prop key="index.htm">controladorPrincipal</prop>
+                <prop key="categorias.htm">controladorPrincipal</prop>
             </props>
         </property>
     </bean>
