@@ -16,7 +16,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="/ProyectoSpring/index.htm">
                     <img src="${pageContext.request.contextPath}/resources/images/logo.png" 
-                        class="img-thumbnail" width="70" height="70" class="d-inline-block align-top" alt="logo">
+                        width="70" height="70" class="d-inline-block align-top img-thumbnail" alt="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -95,62 +95,91 @@
                                                  </c:forEach>
                                              </div>
                                          </div>
-                                         
                                          <div class="container py-4">
                                              <h1>Artículos Destacados</h1>
                                                      <div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel" >
                                                          <div class="carousel-inner">
                                                              <div class="carousel-item active">
-                                                                 <div class="row">
-                                                                     <c:forEach items="${prod}" var="producto">
-                                                                         <div class="col">
-                                                                             <div class="card" style="width: 18rem;">
-                                                                                 <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="...">
-                                                                                 <div class="card-body">
-                                                                                     <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
-                                                                                     <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
-                                                                                     <a href="#" class="btn btn-success">Detalles</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </c:forEach>
-                                                                 </div>
+                                                                     <div class="row">
+                                                                         <c:forEach items="${prod}" var="producto">
+                                                                             <a href="#" class="text-reset">
+                                                                                <div class="col">
+                                                                                    <div class="card" style="width: 18rem;">
+                                                                                        <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="..." />
+                                                                                        <div class="card-body">
+                                                                                            <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
+                                                                                            <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
+                                                                                            <a href="#" class="btn btn-success">Detalles</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                             </a>
+                                                                         </c:forEach>
+                                                                     </div>  
                                                              </div>
                                                              <div class="carousel-item">
-                                                                 <div class="row">
-                                                                     <c:forEach items="${prod2}" var="producto">
-                                                                         <div class="col">
-                                                                             <div class="card" style="width: 18rem;">
-                                                                                 <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="...">
-                                                                                 <div class="card-body ">
-                                                                                     <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
-                                                                                     <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
-                                                                                     <a href="#" class="btn btn-success">Detalles</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </c:forEach>
-                                                                 </div>
+                                                                    <div class="row">
+                                                                        <c:forEach items="${prod2}" var="producto">
+                                                                            <a href="#" class="text-reset">
+                                                                                <div class="col">
+                                                                                    <div class="card" style="width: 18rem;">
+                                                                                        <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="..." />
+                                                                                        <div class="card-body ">
+                                                                                            <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
+                                                                                            <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
+                                                                                            <a href="#" class="btn btn-success">Detalles</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </a>
+                                                                        </c:forEach>
+                                                                    </div>
                                                              </div>
                                                              <div class="carousel-item">
-                                                                 <div class="row">
-                                                                     <c:forEach items="${prod3}" var="producto">
-                                                                         <div class="col">
-                                                                             <div class="card" style="width: 18rem;">
-                                                                                 <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="...">
-                                                                                 <div class="card-body">
-                                                                                     <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
-                                                                                     <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
-                                                                                     <a href="#" class="btn btn-success">Detalles</a>
-                                                                                 </div>
-                                                                             </div>
-                                                                         </div>
-                                                                     </c:forEach>
-                                                                 </div>
+                                                                    <div class="row">
+                                                                        <c:forEach items="${prod3}" var="producto">
+                                                                            <a href="#" class="text-reset">
+                                                                                <div class="col">
+                                                                                    <div class="card" style="width: 18rem;">
+                                                                                        <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="..." />
+                                                                                        <div class="card-body">
+                                                                                            <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
+                                                                                            <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
+                                                                                            <a href="#" class="btn btn-success">Detalles</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </a>
+                                                                        </c:forEach>
+                                                                    </div>
                                                              </div>
                                                          </div>
                                                      </div>
                                              </div>
+                                         <footer class="container-fluid bg-info">
+                                             <div class="row w-100">
+                                                 <div class="col-fluid py-3 px-5">
+                                                     <img src="${pageContext.request.contextPath}/resources/images/logo.png" 
+                                                          width="70" height="70" class="d-inline-block align-top img-thumbnail" alt="Logo">
+                                                 </div>
+                                                 <div class="col-fluid m-2 pr-5">
+                                                     <h4>IME</h4>
+                                                     <a href="" class="text-reset text-decoration-none">Sobre nosotros</a><br>
+                                                     <a href="" class="text-reset text-decoration-none">Ubícanos</a><br>
+                                                     <a href="" class="text-reset text-decoration-none">Contacto</a><br>
+                                                 </div>
+                                                 <div class="col-fluid m-2 pr-5">
+                                                     <h4>Horario</h4>
+                                                     <p>Lunes a viernes 9:00 a 16:30</p>
+                                                 </div>
+                                                 <div class="col-fluid m-2 pr-5">
+                                                     <h4>Información</h4>
+                                                     <a href="" class="text-reset text-decoration-none">Condiciones</a><br>
+                                                     <a href="" class="text-reset text-decoration-none">Comerciales</a><br>
+                                                     <a href="" class="text-reset text-decoration-none">Política de privacidad</a><br>
+                                                 </div>
+                                             </div>
+                                         </footer>
                                          <script>
                                              $('#bs4-multi-slide-carousel').carousel({
                                                interval: 400
