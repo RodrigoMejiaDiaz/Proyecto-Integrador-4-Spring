@@ -68,12 +68,12 @@ public class controladorPrincipal {
        mvc.setViewName("categorias");
        String cod_cat = variable.getParameter("cod_cat");
        
-       String sql = "SELECT * FROM tienda_categoria_producto WHERE cod_cat="+cod_cat;
+       String sql = "SELECT * FROM tienda_categoria_producto";
        List cat = this.plantillaJDBC.queryForList(sql);
        
        String sql2 = "SELECT cod_prod, producto, precio, stock, estado, image FROM tienda_producto WHERE cod_cat_id="+cod_cat;
        List prod = this.plantillaJDBC.queryForList(sql2);
-       
+       mvc.addObject("cod_cat", cod_cat);
        mvc.addObject("cat", cat);
        mvc.addObject("prod", prod);
        return mvc;
