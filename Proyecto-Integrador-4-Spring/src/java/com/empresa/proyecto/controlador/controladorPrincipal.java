@@ -73,9 +73,13 @@ public class controladorPrincipal {
        
        String sql2 = "SELECT cod_prod, producto, precio, stock, estado, image FROM tienda_producto WHERE cod_cat_id="+cod_cat;
        List prod = this.plantillaJDBC.queryForList(sql2);
+       
+       int cant = prod.size();
+       
        mvc.addObject("cod_cat", cod_cat);
        mvc.addObject("cat", cat);
        mvc.addObject("prod", prod);
+       mvc.addObject("cant", cant);
        return mvc;
    }
 }
