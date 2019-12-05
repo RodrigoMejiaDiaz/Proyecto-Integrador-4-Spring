@@ -69,33 +69,59 @@
                 </div>
             </ul>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col my-4 d-none d-xl-block">
-                    adfasdf
-                </div>
-                <div class="col-11">
-                    <c:forEach items="${cat}" var="categoria">
-                        <c:if test="${cod_cat == categoria.cod_cat}">
-                            <div class="card mb-3 my-4 mx-auto" style="max-width: 540px;">
-                                <div class="row no-gutters">
-                                    <div class="col-md-4">
-                                        <img src="<c:out value="${categoria.image}" />" class="card-img" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
+                    <div class="container">
+                        <div class="col col-12">
+                            <div class="row">
+                                <div class="col col-3 d-none d-lg-block d-xl-block">
+                                    <div class="card my-4 mr-5" style="width: 13rem;">
                                         <div class="card-body">
-                                            <h5 class="card-title"><c:out value="${categoria.categoria}" /></h5>
-                                            <p class="card-text"><c:out value="${categoria.descripcion}" /></p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            <h5 class="card-title">Precio</h5>
+                                            <a href="#" class="card-link">Menos de S/.20</a><br>
+                                            <a href="#" class="card-link">Entre S/.20 y S/.40</a><br>
+                                            <a href="#" class="card-link">Entre S/.40 y S/.100</a><br>
+                                            <a href="#" class="card-link">Más de S/.100</a>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col col-9">
+                                    <c:forEach items="${cat}" var="categoria">
+                                        <c:if test="${cod_cat == categoria.cod_cat}">
+                                            <div class="card my-4" style="max-width: 540px;">
+                                                <div class="row no-gutters">
+                                                    <div class="col-md-4">
+                                                        <img src="<c:out value="${categoria.image}" />" class="card-img" alt="...">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title"><c:out value="${categoria.categoria}" /></h5>
+                                                            <p class="card-text"><c:out value="${categoria.descripcion}" /></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                    </c:forEach>
+                                    <div class="card-deck">
+                                        <c:forEach items="${prod}" var="producto">
+                                            <div class="card d-none d-lg-block d-xl-block">
+                                                <img src="<c:out value="${producto.image}"/>" class="card-img-top" 
+                                                     alt="Producto"/>
+                                                <div class="card-body">
+                                                    <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
+                                                    <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
+                                                    <a href="#" class="btn btn-success stretched-link">Detalles</a>
+                                                </div>
+                                            </div>
+                                        </c:forEach> 
+                                    </div>
+                                </div>
                             </div>
-                        </c:if>
-                    </c:forEach>
-                </div>
-            </div>
-        </div>
+                            
+                            
+                            
+                        </div>
+                         
+                    </div>
                         
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
