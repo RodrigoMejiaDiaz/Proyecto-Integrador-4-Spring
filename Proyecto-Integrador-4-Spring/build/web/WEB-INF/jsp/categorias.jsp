@@ -41,6 +41,14 @@
                         <li class="nav-item">
                             <a class="nav-link border-bottom" href="#">Ubícanos</a>
                         </li>
+                        <li class="nav-item dropdown d-xl-none d-lg-none">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categorías</a>
+                            <div class="dropdown-menu">
+                                <c:forEach items="${cat}" var="categorias">
+                                    <a class="dropdown-item <c:if test="${cod_cat == categorias.cod_cat}" >active</c:if>" href="categorias.htm?cod_cat=<c:out value="${categorias.cod_cat}"/>"><c:out value="${categorias.categoria}" /></a>
+                                </c:forEach>
+                            </div>
+                        </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto..." aria-label="Search">
@@ -48,7 +56,7 @@
                     </form>
                 </div>
             </nav>
-            <ul class="nav nav-tabs navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+            <ul class="nav nav-tabs navbar-light navbar-expand-lg d-none d-lg-block" style="background-color: #e3f2fd;">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <li class="nav-item">
                         <a class="nav-link border-bottom" href="index.htm">Inicio</a>
@@ -60,6 +68,33 @@
                     </c:forEach>
                 </div>
             </ul>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col my-4 d-none d-xl-block">
+                    adfasdf
+                </div>
+                <div class="col-11">
+                    <c:forEach items="${cat}" var="categoria">
+                        <c:if test="${cod_cat == categoria.cod_cat}">
+                            <div class="card mb-3 my-4 mx-auto" style="max-width: 540px;">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                        <img src="<c:out value="${categoria.image}" />" class="card-img" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><c:out value="${categoria.categoria}" /></h5>
+                                            <p class="card-text"><c:out value="${categoria.descripcion}" /></p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </div>
         </div>
                         
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

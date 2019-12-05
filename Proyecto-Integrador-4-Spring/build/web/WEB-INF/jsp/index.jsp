@@ -36,6 +36,14 @@
                         <li class="nav-item">
                             <a class="nav-link border-bottom" href="#">Ubícanos</a>
                         </li>
+                        <li class="nav-item dropdown d-xl-none d-lg-none">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categorías</a>
+                            <div class="dropdown-menu">
+                                <c:forEach items="${cat}" var="categorias">
+                                    <a class="dropdown-item" href="categorias.htm?cod_cat=<c:out value="${categorias.cod_cat}"/>"><c:out value="${categorias.categoria}" /></a>
+                                </c:forEach>
+                            </div>
+                        </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto..." aria-label="Search">
@@ -43,7 +51,7 @@
                     </form>
                 </div>
             </nav>
-                    <ul class="nav nav-tabs navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+                    <ul class="nav nav-tabs navbar-light navbar-expand-lg d-none d-lg-block" style="background-color: #e3f2fd;">
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <li class="nav-item">
                             <a class="nav-link active border-bottom" href="index.htm">Inicio</a>
@@ -56,7 +64,7 @@
                         </div>
                     </ul>
         </div>
-                        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div id="carouselExampleFade" class="carousel slide carousel-fade d-none d-lg-block d-xl-block" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <img src="${pageContext.request.contextPath}/resources/images/2.jpg" 
