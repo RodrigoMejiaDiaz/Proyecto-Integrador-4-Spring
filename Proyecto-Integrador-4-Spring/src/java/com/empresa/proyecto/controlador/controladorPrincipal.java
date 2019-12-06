@@ -5,17 +5,23 @@
  */
 package com.empresa.proyecto.controlador;
 
+import com.empresa.proyecto.DTO.itemDTO;
 import com.empresa.proyecto.DTO.productoDTO;
 import com.empresa.proyecto.clases.conexion;
+import com.empresa.proyecto.modelo.productoDTOModelo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -167,6 +173,38 @@ public class controladorPrincipal {
    
    @RequestMapping("carro.htm")
    public ModelAndView carro(HttpServletRequest variable){
-       
+        ModelAndView mvc = new ModelAndView();
+        return mvc;
    }
+   
+   @RequestMapping(value = "comprar", method = RequestMethod.GET)
+   public String comprar(HttpServletRequest variable, HttpSession session){
+       String id = variable.getParameter("id");
+       productoDTOModelo productoModelo = new productoDTOModelo();
+       if (session.getAttribute("carro") == null) {
+           List<itemDTO> carro = new ArrayList<>();
+           carro.add(new itemDTO(productoModelo.find(id), 1));
+           session.setAttribute("carro", carro);
+       } else {
+           List<itemDTO> carro = (List<itemDTO>) session.getAttribute("carro");
+           int index = this.existe(id, carro);
+           if (index == -1){
+               carro.add(new itemDTO(productoModelo.find(id), 1));
+           } else {
+               int cantidad = carro.get(index).getCantidad() + 1;
+               carro.get(index).setCantidad(cantidad);
+           }
+           session.setAttribute("carro", carro);
+       }
+       return "redirect:/carro.htm";
+   }
+       
+       private int existe(String id, List<itemDTO> carro){
+           for (int i = 0; i < carro.size(); i++) {
+               if (carro.get(i).getProducto().getCod_prod().equalsIgnoreCase(id)){
+                   return i;
+               }
+           }
+           return -1;
+       }
 }

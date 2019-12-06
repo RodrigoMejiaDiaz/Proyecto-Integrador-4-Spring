@@ -141,7 +141,7 @@
                                                         <input type="number" value="1" class="form-control" name="cantidad">
                                                     </div>
                                                 </div> 
-                                                <button type="submit" class="btn btn-success">Comprar</button>
+                                                <a href="comprar.htm?id=${producto.getCod_prod()}" class="btn btn-success">Comprar</a>
                                             </form>
                                         </div>
                                         
