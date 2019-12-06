@@ -83,7 +83,7 @@
                                 <a class="dropdown-item" href="#">Forgot password?</a>
                             </div>
                         </div>
-                        <a href="#" class="mx-2" id="dropdownMenuButton">
+                        <a href="carro.htm" class="mx-2" id="dropdownMenuButton">
                             <img src="${pageContext.request.contextPath}/resources/images/shopping-cart.svg" />
                         </a>
                 </div>
