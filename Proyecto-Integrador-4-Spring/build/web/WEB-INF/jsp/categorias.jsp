@@ -101,6 +101,26 @@
                                             </div>
                                         </c:if>
                                     </c:forEach>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="">Mostrando: <c:out value="${cant}"/> resultados</p>
+                                        </div>
+                                        <div class="col mx-3">
+                                            <div class="dropdown text-right">
+                                                <button class="btn btn-outline-dark dropdown-toggle" type="button" data-toggle="dropdown" 
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                    Filtrar por:
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Nombre: A-Z</a>
+                                                    <a class="dropdown-item" href="#">Nombre: Z-A</a>
+                                                    <a class="dropdown-item" href="#">Precio: Mayor a Menor</a>
+                                                    <a class="dropdown-item" href="#">Precio: Menor a Mayor</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
                                     <div class="card-deck">
                                         <c:forEach items="${prod}" var="producto">
                                             <div class="col col-4">
@@ -118,11 +138,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
-                            
                         </div>
-                         
                     </div>
                         <footer class="container-fluid" style="background-color: #e3f2fd;">
                             <div class="row w-100">
