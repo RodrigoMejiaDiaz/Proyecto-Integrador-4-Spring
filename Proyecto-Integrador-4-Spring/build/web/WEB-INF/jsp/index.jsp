@@ -45,10 +45,44 @@
                             </div>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0">
+                    <form class="form-inline d-none d-xl-block d-lg-block my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto..." aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img src="${pageContext.request.contextPath}/resources/images/search.svg" /> </button>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                            <img src="${pageContext.request.contextPath}/resources/images/search.svg" /> 
+                        </button>
                     </form>
+                    <div class="dropdown dropleft d-none d-xl-block d-lg-block mx-2">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="${pageContext.request.contextPath}/resources/images/user.svg" />
+                        </button>
+                        <div class="dropdown-menu">
+                            <form class="px-4 py-3">
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleDropdownFormPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                        <label class="form-check-label" for="dropdownCheck">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Sign in</button>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">New around here? Sign up</a>
+                            <a class="dropdown-item" href="#">Forgot password?</a>
+                        </div>
+                    </div>
+                            <a href="#" class="mx-2" id="dropdownMenuButton">
+                                <img src="${pageContext.request.contextPath}/resources/images/shopping-cart.svg" />
+                            </a>
                 </div>
             </nav>
                     <ul class="nav nav-tabs navbar-light navbar-expand-lg d-none d-lg-block" style="background-color: #e3f2fd;">
