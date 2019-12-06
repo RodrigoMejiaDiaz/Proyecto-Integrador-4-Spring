@@ -15,13 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -201,6 +205,22 @@ public class controladorPrincipal {
        return "redirect:/carro.htm";
    }
    
+    @RequestMapping(value = "comprar", method = RequestMethod.POST)
+    public ModelAndView comprar(@ModelAttribute("itemDTO") itemDTO d,
+            BindingResult result,
+            SessionStatus status) {
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("agregar");
+            return mav;
+        } else {
+            this.plantillaJDBC.update(
+                    "INSERT INTO datos (usuario,fecha_compra,precio_total,cod_user_id,cod_prod) "
+                    + "values (?,?,?,?,?)"
+            );
+            return new ModelAndView("redirect:/index.htm");
+        }
+    }
+   
     @RequestMapping(value = "remover", method = RequestMethod.GET)
     public String remover(HttpServletRequest variable, HttpSession session) {
         String id = variable.getParameter("id");
@@ -211,12 +231,14 @@ public class controladorPrincipal {
         return "redirect:/carro.htm";
     }
        
-       private int existe(String id, List<itemDTO> carro){
-           for (int i = 0; i < carro.size(); i++) {
-               if (carro.get(i).getProducto().getCod_prod().equalsIgnoreCase(id)){
-                   return i;
-               }
-           }
-           return -1;
-       }
+    private int existe(String id, List<itemDTO> carro){
+        for (int i = 0; i < carro.size(); i++) {
+            if (carro.get(i).getProducto().getCod_prod().equalsIgnoreCase(id)){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    
 }

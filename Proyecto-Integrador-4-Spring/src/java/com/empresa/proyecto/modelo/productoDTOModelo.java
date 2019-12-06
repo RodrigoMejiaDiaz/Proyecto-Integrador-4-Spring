@@ -18,7 +18,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class productoDTOModelo {
     
-    private JdbcTemplate plantillaJDBC;
+    private final JdbcTemplate plantillaJDBC;
     public productoDTOModelo() {
         conexion xcon = new conexion();
         this.plantillaJDBC = new JdbcTemplate(xcon.conexion());
@@ -43,7 +43,7 @@ public class productoDTOModelo {
                 productos.setStock(Integer.parseInt(rs.getString("stock")));
                 productos.setEstado(rs.getString("estado"));
                 productos.setCod_cat_id(Integer.parseInt(rs.getString("cod_cat_id")));
-                productos.setCod_prov_id(Integer.parseInt(rs.getString("cod_prov_id")));
+                //productos.setCod_prov_id(Integer.parseInt(rs.getString("cod_prov_id")));
                 productos.setImage(rs.getString("image"));
                 productos.setDestacado(rs.getString("destacado"));
                
