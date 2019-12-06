@@ -37,13 +37,13 @@ public class controladorPrincipal {
        String sql = "SELECT cod_cat, categoria, image FROM tienda_categoria_producto";
        List cat = this.plantillaJDBC.queryForList(sql);
        
-       String sql2 = "SELECT cod_prod, producto, precio, stock, estado, image, destacado FROM tienda_producto WHERE destacado='A' LIMIT 3";
+       String sql2 = "SELECT cod_prod, producto, precio, stock, estado, cod_cat_id, image, destacado FROM tienda_producto WHERE destacado='A' LIMIT 3";
        List prod = this.plantillaJDBC.queryForList(sql2);
        
-       String sql3 = "SELECT cod_prod, producto, precio, stock, estado, image, destacado FROM tienda_producto WHERE destacado='A' LIMIT 6";
+       String sql3 = "SELECT cod_prod, producto, precio, stock, estado, cod_cat_id, image, destacado FROM tienda_producto WHERE destacado='A' LIMIT 6";
        List prod2 = this.plantillaJDBC.queryForList(sql3);
        
-       String sql4 = "SELECT cod_prod, producto, precio, stock, estado, image, destacado FROM tienda_producto WHERE destacado='A' LIMIT 9";
+       String sql4 = "SELECT cod_prod, producto, precio, stock, estado, cod_cat_id, image, destacado FROM tienda_producto WHERE destacado='A' LIMIT 9";
        List prod3 = this.plantillaJDBC.queryForList(sql4);
        
        //Eliminar elementos repetidos de segundo conjunto de productos destacados
@@ -73,10 +73,9 @@ public class controladorPrincipal {
        mvc.setViewName("categorias");
        String cod_cat = variable.getParameter("cod_cat");
        
-       String sql = "SELECT * FROM tienda_categoria_producto";
-       List cat = this.plantillaJDBC.queryForList(sql);
+       List cat = this.listaCategorias();
        
-       String sql2 = "SELECT cod_prod, producto, precio, stock, estado, image FROM tienda_producto WHERE cod_cat_id="+cod_cat;
+       String sql2 = "SELECT cod_prod, producto, precio, cod_cat_id, stock, estado, image FROM tienda_producto WHERE cod_cat_id="+cod_cat;
        List prod = this.plantillaJDBC.queryForList(sql2);
        
        int cant = prod.size();
@@ -93,18 +92,22 @@ public class controladorPrincipal {
        ModelAndView mvc = new ModelAndView();
        mvc.setViewName("producto");
        String cod_prod = variable.getParameter("cod_prod");
+       String cod_cat = variable.getParameter("cod_cat");
        
-       String sql = "SELECT * FROM tienda_producto WHERE cod_prod="+cod_prod;
        productoDTO producto = this.seleccionarProducto(cod_prod);
        
+       List cat = this.listaCategorias();
+       
        mvc.addObject("prod", producto);
+       mvc.addObject("cat", cat);
+       mvc.addObject("cod_cat", cod_cat);
        
        return mvc;
    }
    
-   public productoDTO seleccionarProducto(String id){
+   public productoDTO seleccionarProducto(String cod_prod){
        final productoDTO producto = new productoDTO();
-       String sql = "SELECT * FROM tienda_producto WHERE cod_prod=" + id;
+       String sql = "SELECT * FROM tienda_producto WHERE cod_prod=" + cod_prod;
        return (productoDTO) plantillaJDBC.query(sql, (ResultSet rs) -> {
            if (rs.next()) {
                producto.setCod_prod(rs.getString("cod_prod"));
@@ -112,9 +115,16 @@ public class controladorPrincipal {
                producto.setDescripcion(rs.getString("descripcion"));
                producto.setPrecio(Integer.parseInt(rs.getString("precio")));
                producto.setStock(Integer.parseInt(rs.getString("stock")));
+               producto.setCod_cat_id(Integer.parseInt(rs.getString("cod_cat_id")));
                producto.setImage(rs.getString("image"));
            }
            return producto;
        });
+   }
+   
+   public List listaCategorias(){
+       String sql = "SELECT * FROM tienda_categoria_producto";
+       List cat = this.plantillaJDBC.queryForList(sql);
+       return cat;
    }
 }

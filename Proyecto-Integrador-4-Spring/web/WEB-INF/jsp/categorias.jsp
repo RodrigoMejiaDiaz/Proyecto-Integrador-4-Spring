@@ -138,7 +138,7 @@
                                                     <div class="card-body">
                                                         <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
                                                         <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
-                                                        <a href="producto.htm?cod_prod=<c:out value="${producto.cod_prod}"/>" class="btn btn-success stretched-link">Detalles</a>
+                                                        <a href="producto.htm?cod_prod=<c:out value="${producto.cod_prod}"/>&cod_cat=<c:out value="${producto.cod_cat_id}"/>" class="btn btn-success stretched-link">Detalles</a>
                                                     </div>
                                                 </div>
                                             </div>
