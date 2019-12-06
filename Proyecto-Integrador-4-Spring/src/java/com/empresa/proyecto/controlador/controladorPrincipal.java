@@ -164,4 +164,9 @@ public class controladorPrincipal {
        List cat = this.plantillaJDBC.queryForList(sql);
        return cat;
    }
+   
+   @RequestMapping("carro.htm")
+   public ModelAndView carro(HttpServletRequest variable){
+       
+   }
 }
