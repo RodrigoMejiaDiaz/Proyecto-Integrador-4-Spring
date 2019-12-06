@@ -82,4 +82,18 @@ public class controladorPrincipal {
        mvc.addObject("cant", cant);
        return mvc;
    }
+   
+   @RequestMapping("producto.htm")
+   public ModelAndView producto(HttpServletRequest variable){
+       ModelAndView mvc = new ModelAndView();
+       mvc.setViewName("producto");
+       String cod_prod = variable.getParameter("cod_prod");
+       
+       String sql = "SELECT * FROM tienda_producto WHERE cod_prod="+cod_prod;
+       List prod = this.plantillaJDBC.queryForList(sql);
+       
+       mvc.addObject("prod", prod);
+       
+       return mvc;
+   }
 }

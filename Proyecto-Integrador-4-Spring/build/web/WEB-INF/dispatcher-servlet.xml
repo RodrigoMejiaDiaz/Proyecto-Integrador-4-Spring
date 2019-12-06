@@ -31,6 +31,7 @@
             <props>
                 <prop key="index.htm">controladorPrincipal</prop>
                 <prop key="categorias.htm">controladorPrincipal</prop>
+                <prop key="producto.htm">controladorPrincipal</prop>
             </props>
         </property>
     </bean>

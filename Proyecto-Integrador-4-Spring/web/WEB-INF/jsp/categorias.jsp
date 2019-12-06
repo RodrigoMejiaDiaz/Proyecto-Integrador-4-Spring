@@ -82,6 +82,15 @@
                                             <a href="#" class="card-link">Más de S/.100</a>
                                         </div>
                                     </div>
+                                    <div class="card my-4 mr-5" style="width: 13rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Contáctanos</h5>
+                                            <p class="card-text">
+                                                Teléfono: +51 4587921<br>
+                                                Dirección: Dirección 1. N°3 Avenida Trece de Mayo
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col col-9">
                                     <c:forEach items="${cat}" var="categoria">
@@ -119,7 +128,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                     </div>
                                     <div class="card-deck">
                                         <c:forEach items="${prod}" var="producto">
@@ -130,7 +138,7 @@
                                                     <div class="card-body">
                                                         <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
                                                         <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
-                                                        <a href="#" class="btn btn-success stretched-link">Detalles</a>
+                                                        <a href="producto.htm?cod_prod=<c:out value="${producto.cod_prod}"/>" class="btn btn-success stretched-link">Detalles</a>
                                                     </div>
                                                 </div>
                                             </div>
