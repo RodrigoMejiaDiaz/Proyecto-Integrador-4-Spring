@@ -33,6 +33,7 @@
                 <prop key="categorias.htm">controladorPrincipal</prop>
                 <prop key="producto.htm">controladorPrincipal</prop>
                 <prop key="carro.htm">controladorPrincipal</prop>
+                <prop key="remover.htm">controladorPrincipal</prop>
             </props>
         </property>
     </bean>

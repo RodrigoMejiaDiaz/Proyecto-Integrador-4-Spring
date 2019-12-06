@@ -31,7 +31,7 @@
                        value="${total + item.producto.precio * item.cantidad }"></c:set>
                 <tr>
                     <td align="center"><a
-                            href="#"
+                            href="remover.htm?id=${item.producto.cod_prod}"
                             onclick="return confirm('Are you sure?')">Remove</a></td>
                     <td>${item.producto.cod_prod }</td>
                     <td>${item.producto.producto }</td>

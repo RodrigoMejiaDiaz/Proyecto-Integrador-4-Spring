@@ -198,6 +198,17 @@ public class controladorPrincipal {
        }
        return "redirect:/carro.htm";
    }
+   
+    @RequestMapping(value = "remover", method = RequestMethod.GET)
+    public String remover(HttpServletRequest variable, HttpSession session) {
+        String id = variable.getParameter("id");
+        productoDTOModelo productoModelo = new productoDTOModelo();
+        List<itemDTO> carro = (List<itemDTO>) session.getAttribute("carro");
+        int index = this.existe(id, carro);
+        carro.remove(index);
+        session.setAttribute("carro", carro);
+        return "redirect:/carro.htm";
+    }
        
        private int existe(String id, List<itemDTO> carro){
            for (int i = 0; i < carro.size(); i++) {
