@@ -69,5 +69,146 @@
                 </div>
             </ul>
         </div>
+                    <div class="container">
+                        <div class="col-15">
+                            <div class="row">
+                                <div class="col-3 d-none d-lg-block d-xl-block">
+                                    <div class="card my-4 mr-5" style="width: 13rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Contáctanos</h5>
+                                            <p class="card-text">
+                                                Teléfono: +51 4587921<br>
+                                                Dirección: Dirección 1. N°3 Avenida Trece de Mayo
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 my-4 bg-white">
+                                    <div class="row py-4">
+                                        <div class="col">
+                                            <img src="<c:out value="${producto.getImage()}"/>" class="card-img" alt="...">
+                                        </div>
+                                        <div class="col">
+                                            <h5 class="card-title"><c:out value="${producto.getProducto()}"/></h5>
+                                            <p class="card-text">
+                                                <c:out value="${producto.getDescripcion()}"/><br>
+                                                <br>
+                                                <strong>Stock:</strong> <c:out value="${producto.getStock()}"/>
+                                            </p>
+                                        </div>
+                                    </div>                                
+                                </div>
+                                <div class="col-3 my-4">
+                                    <div class="card text-center" style="max-width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">S/.${producto.getPrecio()}</h5>
+                                            <form>
+                                                <div class="form-row my-4">
+                                                    <label class="col col-form-label">Cantidad:</label>
+                                                    <div class="col">
+                                                        <input type="number" value="1" class="form-control" name="cantidad">
+                                                    </div>
+                                                </div> 
+                                                <button type="submit" class="btn btn-success">Comprar</button>
+                                            </form>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                            <div class="container">
+                                                <h1>Artículos Relacionados</h1>
+                                                <div class="carousel slide" data-ride="carousel" id="multi_item">
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active">
+                                                            <div class="row">
+                                                                <c:forEach items="${prod_rel_1}" var="prod">
+                                                                    <div class="col-sm">
+                                                                        <div class="card" style="width: 18rem;">
+                                                                            <img src="<c:out value="${prod.image}"/>" class="card-img-top img-fluid" alt="..." />
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title font-weight-normal"><c:out value="${prod.producto}"/></h5>
+                                                                                <p class="card-text"><strong>S/.<c:out value="${prod.precio}"/></strong></p>
+                                                                                <a href="producto.htm?cod_prod=<c:out value="${prod.cod_prod}"/>&cod_cat=<c:out value="${prod.cod_cat_id}"/>" class="btn btn-success stretched-link">Detalles</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </c:forEach>
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <div class="row">
+                                                                <c:forEach items="${prod_rel_2}" var="prod">
+                                                                    <div class="col-sm">
+                                                                        <div class="card" style="width: 18rem;">
+                                                                            <img src="<c:out value="${prod.image}"/>" class="card-img-top img-fluid" alt="..." />
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title font-weight-normal"><c:out value="${prod.producto}"/></h5>
+                                                                                <p class="card-text"><strong>S/.<c:out value="${prod.precio}"/></strong></p>
+                                                                                <a href="producto.htm?cod_prod=<c:out value="${prod.cod_prod}"/>&cod_cat=<c:out value="${prod.cod_cat_id}"/>" class="btn btn-success stretched-link">Detalles</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </c:forEach>
+                                                            </div>
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <div class="row">
+                                                                <c:forEach items="${prod_rel_3}" var="prod">
+                                                                    <div class="col-sm">
+                                                                        <div class="card" style="width: 18rem;">
+                                                                            <img src="<c:out value="${prod.image}"/>" class="card-img-top img-fluid" alt="..." />
+                                                                            <div class="card-body">
+                                                                                <h5 class="card-title font-weight-normal"><c:out value="${prod.producto}"/></h5>
+                                                                                <p class="card-text"><strong>S/.<c:out value="${prod.precio}"/></strong></p>
+                                                                                <a href="producto.htm?cod_prod=<c:out value="${prod.cod_prod}"/>&cod_cat=<c:out value="${prod.cod_cat_id}"/>" class="btn btn-success stretched-link">Detalles</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </c:forEach>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#multi_item" role="button" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#multi_item" role="button" data-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <footer class="container-fluid" style="background-color: #e3f2fd;">
+                                                <div class="row w-100">
+                                                    <div class="col-fluid py-3 px-5">
+                                                        <img src="${pageContext.request.contextPath}/resources/images/logo.png" 
+                                                             width="70" height="70" class="d-inline-block align-top img-thumbnail" alt="Logo">
+                                                    </div>
+                                                    <div class="col-fluid m-2 pr-5">
+                                                        <h4>IME</h4>
+                                                        <a href="" class="text-decoration-none">Sobre nosotros</a><br>
+                                                        <a href="" class="text-decoration-none">Ubícanos</a><br>
+                                                        <a href="" class="text-decoration-none">Contacto</a><br>
+                                                    </div>
+                                                    <div class="col-fluid m-2 pr-5">
+                                                        <h4>Horario</h4>
+                                                        <p>Lunes a viernes 9:00 a 16:30</p>
+                                                    </div>
+                                                    <div class="col-fluid m-2 pr-5">
+                                                        <h4>Información</h4>
+                                                        <a href="" class="text-decoration-none">Condiciones</a><br>
+                                                        <a href="" class="text-decoration-none">Comerciales</a><br>
+                                                        <a href="" class="text-decoration-none">Política de privacidad</a><br>
+                                                    </div>
+                                                </div>
+                                            </footer>
+                                            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+                                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>

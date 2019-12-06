@@ -49,13 +49,19 @@ public class controladorPrincipal {
        //Eliminar elementos repetidos de segundo conjunto de productos destacados
        for(int o=0; o < 3; o++){
            for (int i = 0; i < 1; i++) {
-               prod2.remove(i);
+               try {
+                   prod2.remove(i);
+               } catch (Exception e) {
+               }
            }
        }
        //Eliminar elementos repetidos de tercer conjunto de productos destacados
        for (int o = 0; o < 6; o++) {
            for (int i = 0; i < 1; i++) {
-               prod3.remove(i);
+               try {
+                   prod3.remove(i);
+               } catch (Exception e) {
+               }
            }
        }
        
@@ -98,7 +104,38 @@ public class controladorPrincipal {
        
        List cat = this.listaCategorias();
        
-       mvc.addObject("prod", producto);
+       String sql2 = "SELECT cod_prod, producto, precio, stock, estado, cod_cat_id, image, destacado FROM tienda_producto WHERE cod_cat_id='"+producto.getCod_cat_id()+"' LIMIT 3";
+       List prod = this.plantillaJDBC.queryForList(sql2);
+
+       String sql3 = "SELECT cod_prod, producto, precio, stock, estado, cod_cat_id, image, destacado FROM tienda_producto WHERE cod_cat_id='"+producto.getCod_cat_id()+"' LIMIT 6";
+       List prod2 = this.plantillaJDBC.queryForList(sql3);
+
+       String sql4 = "SELECT cod_prod, producto, precio, stock, estado, cod_cat_id, image, destacado FROM tienda_producto WHERE cod_cat_id='"+producto.getCod_cat_id()+"' LIMIT 9";
+       List prod3 = this.plantillaJDBC.queryForList(sql4);
+
+       //Eliminar elementos repetidos de segundo conjunto de productos relacionados
+       for (int o = 0; o < 3; o++) {
+           for (int i = 0; i < 1; i++) {
+               try{
+                   prod2.remove(i);
+               } catch(Exception e) {
+               }
+           }
+       }
+       //Eliminar elementos repetidos de tercer conjunto de productos relacionados
+       for (int o = 0; o < 6; o++) {
+           for (int i = 0; i < 1; i++) {
+               try {
+                   prod3.remove(i);
+               } catch (Exception e) {
+               }
+           }
+       }
+       
+       mvc.addObject("producto", producto);
+       mvc.addObject("prod_rel_1", prod);
+       mvc.addObject("prod_rel_2", prod2);
+       mvc.addObject("prod_rel_3", prod3);
        mvc.addObject("cat", cat);
        mvc.addObject("cod_cat", cod_cat);
        

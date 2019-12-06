@@ -117,61 +117,69 @@
                                                  </c:forEach>
                                              </div>
                                          </div>
-                                         <div class="container py-4">
+                                         <div class="container">
                                              <h1>Artículos Destacados</h1>
-                                                     <div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel" >
-                                                         <div class="carousel-inner">
-                                                             <div class="carousel-item active">
-                                                                     <div class="row">
-                                                                         <c:forEach items="${prod}" var="producto">
-                                                                                <div class="col">
-                                                                                    <div class="card" style="width: 18rem;">
-                                                                                        <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="..." />
-                                                                                        <div class="card-body">
-                                                                                            <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
-                                                                                            <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
-                                                                                            <a href="producto.htm?cod_prod=<c:out value="${producto.cod_prod}"/>&cod_cat=<c:out value="${producto.cod_cat_id}"/>" class="btn btn-success stretched-link">Detalles</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                         </c:forEach>
-                                                                     </div>  
-                                                             </div>
-                                                             <div class="carousel-item">
-                                                                    <div class="row">
-                                                                        <c:forEach items="${prod2}" var="producto">
-                                                                                <div class="col">
-                                                                                    <div class="card" style="width: 18rem;">
-                                                                                        <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="..." />
-                                                                                        <div class="card-body ">
-                                                                                            <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
-                                                                                            <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
-                                                                                            <a href="producto.htm?cod_prod=<c:out value="${producto.cod_prod}"/>&cod_cat=<c:out value="${producto.cod_cat_id}"/>" class="btn btn-success stretched-link">Detalles</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                        </c:forEach>
-                                                                    </div>
-                                                             </div>
-                                                             <div class="carousel-item">
-                                                                    <div class="row">
-                                                                        <c:forEach items="${prod3}" var="producto">
-                                                                                <div class="col">
-                                                                                    <div class="card" style="width: 18rem;">
-                                                                                        <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="..." />
-                                                                                        <div class="card-body">
-                                                                                            <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
-                                                                                            <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
-                                                                                            <a href="producto.htm?cod_prod=<c:out value="${producto.cod_prod}"/>&cod_cat=<c:out value="${producto.cod_cat_id}"/>" class="btn btn-success stretched-link">Detalles</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                        </c:forEach>
-                                                                    </div>
-                                                             </div>
+                                             <div class="carousel slide" data-ride="carousel" id="multi_item">
+                                                 <div class="carousel-inner">
+                                                     <div class="carousel-item active">
+                                                         <div class="row">
+                                                             <c:forEach items="${prod}" var="producto">
+                                                                 <div class="col-sm">
+                                                                     <div class="card" style="width: 18rem;">
+                                                                         <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="..." />
+                                                                         <div class="card-body">
+                                                                             <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
+                                                                             <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
+                                                                             <a href="producto.htm?cod_prod=<c:out value="${producto.cod_prod}"/>&cod_cat=<c:out value="${producto.cod_cat_id}"/>" class="btn btn-success stretched-link">Detalles</a>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </c:forEach>
                                                          </div>
                                                      </div>
+                                                     <div class="carousel-item">
+                                                         <div class="row">
+                                                             <c:forEach items="${prod2}" var="producto">
+                                                                 <div class="col-sm">
+                                                                     <div class="card" style="width: 18rem;">
+                                                                         <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="..." />
+                                                                         <div class="card-body">
+                                                                             <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
+                                                                             <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
+                                                                             <a href="producto.htm?cod_prod=<c:out value="${producto.cod_prod}"/>&cod_cat=<c:out value="${producto.cod_cat_id}"/>" class="btn btn-success stretched-link">Detalles</a>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </c:forEach>
+                                                         </div>
+                                                     </div>
+                                                     <div class="carousel-item">
+                                                         <div class="row">
+                                                             <c:forEach items="${prod3}" var="producto">
+                                                                 <div class="col-sm">
+                                                                     <div class="card" style="width: 18rem;">
+                                                                         <img src="<c:out value="${producto.image}"/>" class="card-img-top img-fluid" alt="..." />
+                                                                         <div class="card-body">
+                                                                             <h5 class="card-title font-weight-normal"><c:out value="${producto.producto}"/></h5>
+                                                                             <p class="card-text"><strong>S/.<c:out value="${producto.precio}"/></strong></p>
+                                                                             <a href="producto.htm?cod_prod=<c:out value="${producto.cod_prod}"/>&cod_cat=<c:out value="${producto.cod_cat_id}"/>" class="btn btn-success stretched-link">Detalles</a>
+                                                                         </div>
+                                                                     </div>
+                                                                 </div>
+                                                             </c:forEach>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                                 <a class="carousel-control-prev" href="#multi_item" role="button" data-slide="prev">
+                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                     <span class="sr-only">Previous</span>
+                                                 </a>
+                                                 <a class="carousel-control-next" href="#multi_item" role="button" data-slide="next">
+                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                     <span class="sr-only">Next</span>
+                                                 </a>
                                              </div>
+                                         </div>
                                          <footer class="container-fluid" style="background-color: #e3f2fd;">
                                              <div class="row w-100">
                                                  <div class="col-fluid py-3 px-5">
