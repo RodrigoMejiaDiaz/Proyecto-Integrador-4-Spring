@@ -10,7 +10,7 @@ package com.empresa.proyecto.DTO;
  * @author Rodrigo
  */
 public class productoDTO {
-    private int cod_prod;
+    private String cod_prod;
     private String producto;
     private String descripcion;
     private int precio;
@@ -20,8 +20,11 @@ public class productoDTO {
     private int cod_prov_id;
     private String image;
     private String[] seleccionEstado = {"A", "X"};
+    private String destacado;
 
-    public productoDTO(int cod_prod, String producto, String descripcion, int precio, int stock, String estado, int cod_cat_id, int cod_prov_id, String image) {
+    public productoDTO(String cod_prod, String producto, String descripcion, 
+            int precio, int stock, String estado, int cod_cat_id, 
+            int cod_prov_id, String image, String destacado) {
         this.cod_prod = cod_prod;
         this.producto = producto;
         this.descripcion = descripcion;
@@ -31,6 +34,7 @@ public class productoDTO {
         this.cod_cat_id = cod_cat_id;
         this.cod_prov_id = cod_prov_id;
         this.image = image;
+        this.destacado = destacado;
     }
 
     public productoDTO() {
@@ -43,13 +47,14 @@ public class productoDTO {
         this.cod_cat_id = cod_cat_id;
         this.cod_prov_id = cod_prov_id;
         this.image = image;
+        this.destacado = destacado;
     }
 
-    public int getCod_prod() {
+    public String getCod_prod() {
         return cod_prod;
     }
 
-    public void setCod_prod(int cod_prod) {
+    public void setCod_prod(String cod_prod) {
         this.cod_prod = cod_prod;
     }
 
@@ -124,6 +129,13 @@ public class productoDTO {
     public void setSeleccionEstado(String[] seleccionEstado) {
         this.seleccionEstado = seleccionEstado;
     }
-    
+
+    public String getDestacado() {
+        return destacado;
+    }
+
+    public void setDestacado(String destacado) {
+        this.destacado = destacado;
+    }
     
 }

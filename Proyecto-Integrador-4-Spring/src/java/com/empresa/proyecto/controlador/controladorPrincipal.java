@@ -5,10 +5,15 @@
  */
 package com.empresa.proyecto.controlador;
 
+import com.empresa.proyecto.DTO.productoDTO;
 import com.empresa.proyecto.clases.conexion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -90,10 +95,26 @@ public class controladorPrincipal {
        String cod_prod = variable.getParameter("cod_prod");
        
        String sql = "SELECT * FROM tienda_producto WHERE cod_prod="+cod_prod;
-       List prod = this.plantillaJDBC.queryForList(sql);
+       productoDTO producto = this.seleccionarProducto(cod_prod);
        
-       mvc.addObject("prod", prod);
+       mvc.addObject("prod", producto);
        
        return mvc;
+   }
+   
+   public productoDTO seleccionarProducto(String id){
+       final productoDTO producto = new productoDTO();
+       String sql = "SELECT * FROM tienda_producto WHERE cod_prod=" + id;
+       return (productoDTO) plantillaJDBC.query(sql, (ResultSet rs) -> {
+           if (rs.next()) {
+               producto.setCod_prod(rs.getString("cod_prod"));
+               producto.setProducto(rs.getString("producto"));
+               producto.setDescripcion(rs.getString("descripcion"));
+               producto.setPrecio(Integer.parseInt(rs.getString("precio")));
+               producto.setStock(Integer.parseInt(rs.getString("stock")));
+               producto.setImage(rs.getString("image"));
+           }
+           return producto;
+       });
    }
 }
