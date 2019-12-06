@@ -174,6 +174,8 @@ public class controladorPrincipal {
    @RequestMapping("carro.htm")
    public ModelAndView carro(HttpServletRequest variable){
         ModelAndView mvc = new ModelAndView();
+        List cat = this.listaCategorias();
+        mvc.addObject("cat", cat);
         return mvc;
    }
    
@@ -202,7 +204,6 @@ public class controladorPrincipal {
     @RequestMapping(value = "remover", method = RequestMethod.GET)
     public String remover(HttpServletRequest variable, HttpSession session) {
         String id = variable.getParameter("id");
-        productoDTOModelo productoModelo = new productoDTOModelo();
         List<itemDTO> carro = (List<itemDTO>) session.getAttribute("carro");
         int index = this.existe(id, carro);
         carro.remove(index);
