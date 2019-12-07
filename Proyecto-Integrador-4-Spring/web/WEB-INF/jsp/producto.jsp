@@ -93,7 +93,7 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="#">Perfil</a>
-                                        <a class="dropdown-item" href="#">Cerrar Sesión</a>
+                                        <a class="dropdown-item" href="salir.htm">Cerrar Sesión</a>
                                     </div>
                                 </div>
                             </c:otherwise>

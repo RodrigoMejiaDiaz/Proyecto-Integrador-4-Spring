@@ -12,7 +12,8 @@
     
     <security:http auto-config="true">
         <security:intercept-url pattern="/" access="permitAll()" />
-        <security:intercept-url pattern="/confirm_comprar.htm" access="hasRole('ROLE_Usuario') or hasRole('ROLE_Administrador')"/>
+        <security:intercept-url pattern="/comprar.htm" access="hasRole('ROLE_Usuario') or hasRole('ROLE_Administrador')"/>
+        <security:logout logout-url="/salir.htm" logout-success-url="/index.jsp" />
     </security:http>
     
     <security:authentication-manager>
