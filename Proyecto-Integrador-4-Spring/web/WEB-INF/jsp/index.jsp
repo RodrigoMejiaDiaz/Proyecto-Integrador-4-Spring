@@ -16,7 +16,7 @@
         <div class="sticky-top">
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
                 <a class="navbar-brand" href="/ProyectoSpring/index.htm">
-                    <img src="${pageContext.request.contextPath}/resources/images/logo.png" 
+                    <img src="images/logo.png" 
                         width="70" height="70" class="d-inline-block align-top img-thumbnail" alt="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,14 +48,14 @@
                     <form class="form-inline d-none d-xl-block d-lg-block my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto..." aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                            <img src="${pageContext.request.contextPath}/resources/images/search.svg" /> 
+                            <img src="images/search.svg" /> 
                         </button>
                     </form>
                             <c:choose>
                                 <c:when test="${username == 'anonymousUser'}">
                                     <div class="dropdown dropleft d-none d-xl-block d-lg-block mx-2">
                                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="${pageContext.request.contextPath}/resources/images/user.svg" />
+                                            <img src="images/user.svg" />
                                         </button>
                                         <div class="dropdown-menu">
                                             <form class="px-4 py-3">
@@ -86,7 +86,7 @@
                                 <c:otherwise>
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="${pageContext.request.contextPath}/resources/images/user.svg" />
+                                            <img src="images/user.svg" />
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item" href="#">Perfil</a>
@@ -96,7 +96,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <a href="carro.htm" class="mx-2" id="dropdownMenuButton">
-                                <img src="${pageContext.request.contextPath}/resources/images/shopping-cart.svg" />
+                                <img src="images/shopping-cart.svg" />
                             </a>
                 </div>
             </nav>
@@ -116,7 +116,7 @@
                         <div id="carouselExampleFade" class="carousel slide carousel-fade d-none d-lg-block d-xl-block" data-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="${pageContext.request.contextPath}/resources/images/2.jpg" 
+                                    <img src="images/2.jpg" 
                                          class="d-block w-100" style="height: 500px;" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5><strong>First slide label</strong></h5>
@@ -124,7 +124,7 @@
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="${pageContext.request.contextPath}/resources/images/carrousel6.jpg" 
+                                    <img src="images/carrousel6.jpg" 
                                          class="d-block w-100" style="height: 500px;" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5><strong>Second slide label</strong></h5>
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="${pageContext.request.contextPath}/resources/images/carrousel3.png" 
+                                    <img src="images/carrousel3.png" 
                                          class="d-block w-100" style="height: 500px;" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5><strong>Third slide label</strong></h5>
