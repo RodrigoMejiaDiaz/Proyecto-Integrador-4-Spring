@@ -198,7 +198,7 @@
                         <footer class="container-fluid" style="background-color: #e3f2fd;">
                             <div class="row w-100">
                                 <div class="col-fluid py-3 px-5">
-                                    <img src="${pageContext.request.contextPath}/resources/images/logo.png" 
+                                    <img src="images/logo.png" 
                                          width="70" height="70" class="d-inline-block align-top img-thumbnail" alt="Logo">
                                 </div>
                                 <div class="col-fluid m-2 pr-5">
