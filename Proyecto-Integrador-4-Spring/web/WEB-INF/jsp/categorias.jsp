@@ -21,8 +21,8 @@
         <div class="sticky-top">
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
                 <a class="navbar-brand" href="/ProyectoSpring/index.htm">
-                    <img src="${pageContext.request.contextPath}/resources/images/logo.png" 
-                         width="70" height="70" class="d-inline-block align-top img-thumbnail" alt="logo">
+                    <img src="images/logo.png"
+                    width="70" height="70" class="d-inline-block align-top img-thumbnail" alt="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -52,39 +52,54 @@
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto..." aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img src="${pageContext.request.contextPath}/resources/images/search.svg" /> </button>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img src="images/search.svg" /> </button>
                     </form>
-                        <div class="dropdown dropleft d-none d-xl-block d-lg-block mx-2">
-                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="${pageContext.request.contextPath}/resources/images/user.svg" />
-                            </button>
-                            <div class="dropdown-menu">
-                                <form class="px-4 py-3">
-                                    <div class="form-group">
-                                        <label for="exampleDropdownFormEmail1">Email address</label>
-                                        <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                        <c:choose>
+                            <c:when test="${username == 'anonymousUser'}">
+                                <div class="dropdown dropleft d-none d-xl-block d-lg-block mx-2">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="images/user.svg" />
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <form class="px-4 py-3">
+                                            <div class="form-group">
+                                                <label for="exampleDropdownFormEmail1">Email address</label>
+                                                <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleDropdownFormPassword1">Password</label>
+                                                <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                                    <label class="form-check-label" for="dropdownCheck">
+                                                        Remember me
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Sign in</button>
+                                        </form>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">New around here? Sign up</a>
+                                        <a class="dropdown-item" href="#">Forgot password?</a>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleDropdownFormPassword1">Password</label>
-                                        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="images/user.svg" />
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Perfil</a>
+                                        <a class="dropdown-item" href="#">Cerrar Sesión</a>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                                            <label class="form-check-label" for="dropdownCheck">
-                                                Remember me
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
-                                </form>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">New around here? Sign up</a>
-                                <a class="dropdown-item" href="#">Forgot password?</a>
-                            </div>
-                        </div>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                         <a href="carro.htm" class="mx-2" id="dropdownMenuButton">
-                            <img src="${pageContext.request.contextPath}/resources/images/shopping-cart.svg" />
+                            <img src="images/shopping-cart.svg" />
                         </a>
                 </div>
             </nav>
