@@ -91,13 +91,13 @@ public class controladorPrincipal {
        mvc.addObject("prod", prod);
        mvc.addObject("prod2", prod2);
        mvc.addObject("prod3", prod3);
-       mvc.setViewName("index");
+       mvc.setViewName("index");    
        mvc = this.añadirUsuarioMVC(mvc);
        return mvc;
    }
    
    @RequestMapping("categorias.htm")
-   public ModelAndView categoria(HttpServletRequest variable){
+   public ModelAndView categoria(HttpServletRequest variable, HttpSession session){
        ModelAndView mvc = new ModelAndView();
        mvc.setViewName("categorias");
        String cod_cat = variable.getParameter("cod_cat");
@@ -114,6 +114,12 @@ public class controladorPrincipal {
        mvc.addObject("prod", prod);
        mvc.addObject("cant", cant);
        mvc = this.añadirUsuarioMVC(mvc);
+       
+       List<usuarioDTO> usuario = new ArrayList<>();
+       usuario.add(this.obtenerUsuario());
+       
+       session.setAttribute("usuario", usuario);
+       
        return mvc;
    }
    
@@ -223,16 +229,10 @@ public class controladorPrincipal {
    
     @RequestMapping(value = "confirm_comprar", method = RequestMethod.POST)
     public ModelAndView confirm_comprar(@ModelAttribute("itemDTO") itemDTO d,
-            SessionStatus status) {
-        conexion xcon = new conexion();
-        String cod_compra = xcon.generarCodigo("tienda_compra", "cod_compra");
-        String fecha_compra = this.getFecha();
-        //String cod_user = this.
+            SessionStatus status, HttpSession session) {
+        session.getAttribute("usuario");
         
-        this.plantillaJDBC.update(
-                "INSERT INTO tienda_compra (cod_compra, cod_user, total, fecha_compra) "
-                + "values (?,?,?,?)"
-        );
+        
         return new ModelAndView("redirect:/index.htm");
     }
    
@@ -263,16 +263,45 @@ public class controladorPrincipal {
         return mvc;
     }
     
-    public usuarioDTO obtenerUsuario(String user) {
+    public usuarioDTO obtenerUsuario() {
         final usuarioDTO usuario = new usuarioDTO();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
         
-        String sql = "SELECT * from tienda_usuario WHERE username LIKE";
-        return (usuarioDTO) plantillaJDBC.query(sql, (ResultSet rs) -> {
+        String sql = "SELECT * from tienda_usuario WHERE username = '"+username+"'";
+        try{return (usuarioDTO) plantillaJDBC.query(sql, (ResultSet rs) -> {
             if (rs.next()) {
-                
+                usuario.setCod_user(rs.getString("cod_user"));
+                usuario.setUsername(rs.getString("username"));
+                usuario.setPassword("nope");
+                usuario.setCorreo(rs.getString("correo"));
+                usuario.setEnabled(rs.getString("enabled"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                usuario.setCompania(rs.getString("compania"));
+                usuario.setTelefono(rs.getString("telefono"));
+                usuario.setFec_nac(rs.getDate("fec_nac"));
+                usuario.setEstado(rs.getString("estado"));
+                usuario.setCod_ciud_id(rs.getString("cod_ciud_id"));
             }
             return usuario;
         });
+        } catch (DataAccessException e){
+            
+        }
+        usuario.setCod_user("");
+        usuario.setUsername("anonymousUser");
+        usuario.setPassword("");
+        usuario.setCorreo("");
+        usuario.setEnabled("");
+        usuario.setNombre("");
+        usuario.setApellido("");
+        usuario.setCompania("");
+        usuario.setTelefono("");
+        usuario.setFec_nac(null);
+        usuario.setEstado("");
+        usuario.setCod_ciud_id("");
+        return usuario;
     }
     
     @RequestMapping(value = "salir", method = RequestMethod.GET)
@@ -318,11 +347,5 @@ public class controladorPrincipal {
         mvc.setViewName("error-login");
         return mvc;
     }  
-    public String getFecha() {
-        Calendar calendar = new GregorianCalendar();
-        Date date = calendar.getTime();
-        DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        return formato.format(date);
-    }
-
+ 
 }
