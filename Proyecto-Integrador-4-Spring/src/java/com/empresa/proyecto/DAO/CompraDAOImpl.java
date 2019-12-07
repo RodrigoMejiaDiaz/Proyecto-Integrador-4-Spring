@@ -21,7 +21,7 @@ import java.util.GregorianCalendar;
 public class CompraDAOImpl implements CompraDAO {
 
     @Override
-    public boolean grabarCompra(String[] datosCompra, String[] codigoProductos, String[] montos) {
+    public boolean grabarCompra(String[] datosCompra, String[] codigoProductos) {
         conexion xcon = new conexion();
         boolean registrar = true;
         Statement stm = null;
@@ -42,7 +42,7 @@ public class CompraDAOImpl implements CompraDAO {
         DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         return formato.format(date);
     }
-    
+
 
     
 

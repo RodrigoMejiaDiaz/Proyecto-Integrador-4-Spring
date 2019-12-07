@@ -17,6 +17,6 @@ import java.util.GregorianCalendar;
  */
 public interface CompraDAO {
     
-    public boolean grabarCompra(String[] datosCompra, String[] codigoProductos, String[] montos);
+    public boolean grabarCompra(String[] datosCompra, String[] codigoProductos);
 
 }

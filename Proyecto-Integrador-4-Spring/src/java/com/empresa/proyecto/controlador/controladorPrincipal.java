@@ -5,6 +5,7 @@
  */
 package com.empresa.proyecto.controlador;
 
+import com.empresa.proyecto.DAO.CompraDAOImpl;
 import com.empresa.proyecto.DTO.compraDTO;
 import com.empresa.proyecto.DTO.itemDTO;
 import com.empresa.proyecto.DTO.productoDTO;
@@ -193,7 +194,7 @@ public class controladorPrincipal {
        return cat;
    }
    
-   @RequestMapping("carro.htm")
+   @RequestMapping("carro")
    public ModelAndView carro(HttpServletRequest variable, 
            HttpSession session){
        
@@ -233,9 +234,25 @@ public class controladorPrincipal {
        return "redirect:/carro.htm";
    }
    
-    @RequestMapping(value = "confirm_comprar", method = RequestMethod.POST)
-    public ModelAndView confirm_comprar(@ModelAttribute("compraDTO") compraDTO d,
-            @ModelAttribute("itemDTO") itemDTO i, SessionStatus status, HttpSession session) {
+    @RequestMapping(value = "carro", method = RequestMethod.POST)
+    public ModelAndView carro(@ModelAttribute("compraDTO") compraDTO d, 
+            SessionStatus status, HttpSession session) {
+        
+        String[] datosCompra = new String[2];
+        datosCompra[0] = d.getCod_user();
+        datosCompra[1] = String.valueOf(d.getTotal());
+        
+        List<itemDTO> carro = (List<itemDTO>) session.getAttribute("carro");
+        String[] codigoProductos = new String[carro.size()];
+        
+        for (int n = 0; n < carro.size(); n++) {
+            itemDTO item = carro.get(n);
+            productoDTO producto = item.getProducto();
+            codigoProductos[n] = producto.getCod_prod();
+        }
+        
+        CompraDAOImpl dao = new CompraDAOImpl();
+        dao.grabarCompra(datosCompra, codigoProductos);
         
         
       return new ModelAndView("redirect:/index.htm");

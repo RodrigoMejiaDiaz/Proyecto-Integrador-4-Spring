@@ -135,14 +135,18 @@
                                 <form:form method="post" commandName="compraDTO">
                                 <tr>
                                     <td colspan="5" align="right">Total</td>
-                                    <td><form:hidden path="total" value="${total}" />${total }</td>
+                                    <td>${total }</td>
                                 </tr>
-                                </form:form>
+                                <c:forEach var="usuario" items="${sessionScope.usuario}">
+                                    <form:hidden path="cod_user" value="${usuario.cod_user}" />
+                                </c:forEach>
+                                <form:hidden path="total" value="${total}" />
                             </tbody>
                         </table>
                         <br>
                         <a class="btn btn-primary" href="javascript:history.back(-1);">Continuar Comprando</a>               
-                        <a class="btn btn-success float-right" href="confirm_comprar.htm">Confirmar compra</a>
+                        <input type="submit" value="Confirmar compra" class="btn btn-success float-right"/>
+                        </form:form>
                     </div>
         
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
