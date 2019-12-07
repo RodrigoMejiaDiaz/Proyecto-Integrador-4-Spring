@@ -19,7 +19,10 @@ import javax.validation.Valid;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,12 +77,13 @@ public class controladorPrincipal {
                }
            }
        }
-       
+              
        mvc.addObject("cat", cat);
        mvc.addObject("prod", prod);
        mvc.addObject("prod2", prod2);
        mvc.addObject("prod3", prod3);
        mvc.setViewName("index");
+       mvc = this.obtenerUser(mvc);
        return mvc;
    }
    
@@ -238,6 +242,15 @@ public class controladorPrincipal {
             }
         }
         return -1;
+    }
+    
+    //Obtener usuario logeado
+    public ModelAndView obtenerUser(ModelAndView mvc){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        
+        mvc.addObject("username", name);
+        return mvc;
     }
     
     
