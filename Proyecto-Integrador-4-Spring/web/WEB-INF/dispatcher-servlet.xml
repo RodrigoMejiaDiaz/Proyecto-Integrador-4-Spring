@@ -35,6 +35,8 @@
                 <prop key="carro.htm">controladorPrincipal</prop>
                 <prop key="remover.htm">controladorPrincipal</prop>
                 <prop key="confirm_comprar.htm">controladorPrincipal</prop>
+                <prop key="login.htm">controladorPrincipal</prop>
+                <prop key="error-login.htm">controladorPrincipal</prop>
             </props>
         </property>
     </bean>

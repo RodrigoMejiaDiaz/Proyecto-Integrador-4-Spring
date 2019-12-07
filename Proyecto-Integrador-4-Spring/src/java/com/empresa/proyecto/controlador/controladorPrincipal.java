@@ -22,6 +22,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -254,7 +255,6 @@ public class controladorPrincipal {
     public ModelAndView obtenerUser(ModelAndView mvc){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-        
         mvc.addObject("username", name);
         return mvc;
     }
@@ -268,5 +268,39 @@ public class controladorPrincipal {
         return "redirect:/index.htm";
     }
     
+    @RequestMapping(value = "acceso-denegado", method = RequestMethod.GET)
+    public ModelAndView accessDenied() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        String usuarioLogin = userDetails.getUsername();
+        
+        ModelAndView mvc = new ModelAndView();
+        mvc.addObject("usuario", usuarioLogin);
+        mvc.setViewName("acceso-denegado");
+        return mvc;
+    }
     
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public ModelAndView login(ModelMap model){
+        ModelAndView mvc = new ModelAndView();
+
+        List cat = this.listaCategorias();
+        mvc.addObject("cat", cat);
+               
+        return mvc;
+    }
+    
+    @RequestMapping(value = "error-login.htm", method = RequestMethod.GET)
+    public ModelAndView loginError(){
+        ModelAndView mvc = new ModelAndView();
+        
+        List cat = this.listaCategorias();
+        mvc.addObject("cat", cat);
+        
+        mvc.setViewName("error-login");
+        return mvc;
+    }
 }
