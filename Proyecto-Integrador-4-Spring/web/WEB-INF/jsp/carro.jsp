@@ -132,14 +132,16 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
+                                <form:form method="post" commandName="compraDTO">
                                 <tr>
                                     <td colspan="5" align="right">Total</td>
-                                    <td>${total }</td>
+                                    <td><form:hidden path="total" value="${total}" />${total }</td>
                                 </tr>
+                                </form:form>
                             </tbody>
                         </table>
                         <br>
-                        <a class="btn btn-primary" href="javascript:history.back(-1);">Continuar Comprando</a>
+                        <a class="btn btn-primary" href="javascript:history.back(-1);">Continuar Comprando</a>               
                         <a class="btn btn-success float-right" href="confirm_comprar.htm">Confirmar compra</a>
                     </div>
         

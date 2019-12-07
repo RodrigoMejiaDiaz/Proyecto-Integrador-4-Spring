@@ -5,6 +5,7 @@
  */
 package com.empresa.proyecto.controlador;
 
+import com.empresa.proyecto.DTO.compraDTO;
 import com.empresa.proyecto.DTO.itemDTO;
 import com.empresa.proyecto.DTO.productoDTO;
 import com.empresa.proyecto.DTO.usuarioDTO;
@@ -115,10 +116,6 @@ public class controladorPrincipal {
        mvc.addObject("cant", cant);
        mvc = this.añadirUsuarioMVC(mvc);
        
-       List<usuarioDTO> usuario = new ArrayList<>();
-       usuario.add(this.obtenerUsuario());
-       
-       session.setAttribute("usuario", usuario);
        
        return mvc;
    }
@@ -197,11 +194,20 @@ public class controladorPrincipal {
    }
    
    @RequestMapping("carro.htm")
-   public ModelAndView carro(HttpServletRequest variable){
+   public ModelAndView carro(HttpServletRequest variable, 
+           HttpSession session){
+       
         ModelAndView mvc = new ModelAndView();
         List cat = this.listaCategorias();
+        
+        List<usuarioDTO> usuario = new ArrayList<>();
+        usuario.add(this.obtenerUsuario());
+        
+        session.setAttribute("usuario", usuario);
         mvc.addObject("cat", cat);
+        mvc.addObject("compraDTO", new compraDTO());
         mvc = this.añadirUsuarioMVC(mvc);
+
         return mvc;
    }
    
@@ -228,12 +234,11 @@ public class controladorPrincipal {
    }
    
     @RequestMapping(value = "confirm_comprar", method = RequestMethod.POST)
-    public ModelAndView confirm_comprar(@ModelAttribute("itemDTO") itemDTO d,
+    public ModelAndView confirm_comprar(@ModelAttribute("compraDTO") compraDTO d,
             SessionStatus status, HttpSession session) {
-        session.getAttribute("usuario");
         
         
-        return new ModelAndView("redirect:/index.htm");
+      return new ModelAndView("redirect:/index.htm");
     }
    
     @RequestMapping(value = "remover", method = RequestMethod.GET)
