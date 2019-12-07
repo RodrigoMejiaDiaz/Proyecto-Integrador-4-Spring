@@ -104,6 +104,7 @@ public class controladorPrincipal {
        mvc.addObject("cat", cat);
        mvc.addObject("prod", prod);
        mvc.addObject("cant", cant);
+       mvc = this.obtenerUser(mvc);
        return mvc;
    }
    
@@ -152,7 +153,8 @@ public class controladorPrincipal {
        mvc.addObject("prod_rel_3", prod3);
        mvc.addObject("cat", cat);
        mvc.addObject("cod_cat", cod_cat);
-       
+       mvc = this.obtenerUser(mvc);
+
        return mvc;
    }
    
@@ -184,6 +186,8 @@ public class controladorPrincipal {
         ModelAndView mvc = new ModelAndView();
         List cat = this.listaCategorias();
         mvc.addObject("cat", cat);
+        mvc = this.obtenerUser(mvc);
+
         return mvc;
    }
    
@@ -209,8 +213,8 @@ public class controladorPrincipal {
        return "redirect:/carro.htm";
    }
    
-    @RequestMapping(value = "comprar", method = RequestMethod.POST)
-    public ModelAndView comprar(@ModelAttribute("itemDTO") itemDTO d,
+    @RequestMapping(value = "confirm_comprar", method = RequestMethod.POST)
+    public ModelAndView confirm_comprar(@ModelAttribute("itemDTO") itemDTO d,
             BindingResult result,
             SessionStatus status) {
         if (result.hasErrors()) {
