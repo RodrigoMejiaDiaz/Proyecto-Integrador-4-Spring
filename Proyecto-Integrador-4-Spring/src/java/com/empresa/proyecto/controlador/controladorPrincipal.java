@@ -235,7 +235,7 @@ public class controladorPrincipal {
    
     @RequestMapping(value = "confirm_comprar", method = RequestMethod.POST)
     public ModelAndView confirm_comprar(@ModelAttribute("compraDTO") compraDTO d,
-            SessionStatus status, HttpSession session) {
+            @ModelAttribute("itemDTO") itemDTO i, SessionStatus status, HttpSession session) {
         
         
       return new ModelAndView("redirect:/index.htm");
