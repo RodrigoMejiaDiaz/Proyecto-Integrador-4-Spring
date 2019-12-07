@@ -104,7 +104,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <form:form method="post" commandName="compraDTO">
                                 <c:set var="total" value="0"></c:set>
+                                <c:set var="monstos" value="0"></c:set>
                                 <c:forEach var="item" items="${sessionScope.carro}">
                                     <c:set var="total"
                                            value="${total + item.producto.precio * item.cantidad }"></c:set>
@@ -125,14 +127,13 @@
                                             ${item.producto.precio }
                                         </td>
                                         <td>
-                                            ${item.cantidad }
+                                            <form:hidden path="cantidad" value="${item.cantidad }" />${item.cantidad }
                                         </td>
                                         <td>
-                                            ${item.producto.precio * item.cantidad }
+                                            <form:hidden path="montos" value="${item.producto.precio * item.cantidad }" />${item.producto.precio * item.cantidad }
                                         </td>
                                     </tr>
                                 </c:forEach>
-                                <form:form method="post" commandName="compraDTO">
                                 <tr>
                                     <td colspan="5" align="right">Total</td>
                                     <td>${total }</td>

@@ -236,7 +236,7 @@ public class controladorPrincipal {
    
     @RequestMapping(value = "carro", method = RequestMethod.POST)
     public ModelAndView carro(@ModelAttribute("compraDTO") compraDTO d, 
-            SessionStatus status, HttpSession session) {
+            SessionStatus status, HttpSession session, HttpServletRequest variable) {
         
         String[] datosCompra = new String[2];
         datosCompra[0] = d.getCod_user();
@@ -244,6 +244,9 @@ public class controladorPrincipal {
         
         List<itemDTO> carro = (List<itemDTO>) session.getAttribute("carro");
         String[] codigoProductos = new String[carro.size()];
+        
+        String montos[] = variable.getParameterValues("montos");
+        String cantidad[] = variable.getParameterValues("cantidad");
         
         for (int n = 0; n < carro.size(); n++) {
             itemDTO item = carro.get(n);

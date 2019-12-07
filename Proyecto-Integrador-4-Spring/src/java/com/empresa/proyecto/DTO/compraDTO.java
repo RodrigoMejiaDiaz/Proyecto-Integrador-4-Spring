@@ -18,6 +18,8 @@ public class compraDTO {
     private int total;
     private String cod_user;
     private Date fecha_compra;
+    private String[] montos;
+    private String[] cantidad;
 
     public String getCod_compra() {
         return cod_compra;
@@ -51,6 +53,22 @@ public class compraDTO {
         this.fecha_compra = fecha_compra;
     }
 
+    public String[] getMontos() {
+        return montos;
+    }
+
+    public void setMontos(String[] montos) {
+        this.montos = montos;
+    }
+
+    public String[] getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(String[] cantidad) {
+        this.cantidad = cantidad;
+    }
+     
     public compraDTO(String cod_compra, int total, String cod_user, Date fecha_compra) {
         this.cod_compra = cod_compra;
         this.total = total;
