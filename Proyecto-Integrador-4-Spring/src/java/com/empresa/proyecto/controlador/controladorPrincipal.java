@@ -7,13 +7,20 @@ package com.empresa.proyecto.controlador;
 
 import com.empresa.proyecto.DTO.itemDTO;
 import com.empresa.proyecto.DTO.productoDTO;
+import com.empresa.proyecto.DTO.usuarioDTO;
 import com.empresa.proyecto.clases.conexion;
 import com.empresa.proyecto.modelo.productoDTOModelo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.dao.DataAccessException;
@@ -21,6 +28,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -77,13 +86,13 @@ public class controladorPrincipal {
                }
            }
        }
-              
+
        mvc.addObject("cat", cat);
        mvc.addObject("prod", prod);
        mvc.addObject("prod2", prod2);
        mvc.addObject("prod3", prod3);
        mvc.setViewName("index");
-       mvc = this.obtenerUser(mvc);
+       mvc = this.añadirUsuarioMVC(mvc);
        return mvc;
    }
    
@@ -104,7 +113,7 @@ public class controladorPrincipal {
        mvc.addObject("cat", cat);
        mvc.addObject("prod", prod);
        mvc.addObject("cant", cant);
-       mvc = this.obtenerUser(mvc);
+       mvc = this.añadirUsuarioMVC(mvc);
        return mvc;
    }
    
@@ -153,7 +162,7 @@ public class controladorPrincipal {
        mvc.addObject("prod_rel_3", prod3);
        mvc.addObject("cat", cat);
        mvc.addObject("cod_cat", cod_cat);
-       mvc = this.obtenerUser(mvc);
+       mvc = this.añadirUsuarioMVC(mvc);
 
        return mvc;
    }
@@ -186,8 +195,7 @@ public class controladorPrincipal {
         ModelAndView mvc = new ModelAndView();
         List cat = this.listaCategorias();
         mvc.addObject("cat", cat);
-        mvc = this.obtenerUser(mvc);
-
+        mvc = this.añadirUsuarioMVC(mvc);
         return mvc;
    }
    
@@ -215,18 +223,17 @@ public class controladorPrincipal {
    
     @RequestMapping(value = "confirm_comprar", method = RequestMethod.POST)
     public ModelAndView confirm_comprar(@ModelAttribute("itemDTO") itemDTO d,
-            BindingResult result,
             SessionStatus status) {
-        if (result.hasErrors()) {
-            ModelAndView mav = new ModelAndView("agregar");
-            return mav;
-        } else {
-            this.plantillaJDBC.update(
-                    "INSERT INTO datos (usuario,fecha_compra,precio_total,cod_user_id,cod_prod) "
-                    + "values (?,?,?,?,?)"
-            );
-            return new ModelAndView("redirect:/index.htm");
-        }
+        conexion xcon = new conexion();
+        String cod_compra = xcon.generarCodigo("tienda_compra", "cod_compra");
+        String fecha_compra = this.getFecha();
+        //String cod_user = this.
+        
+        this.plantillaJDBC.update(
+                "INSERT INTO tienda_compra (cod_compra, cod_user, total, fecha_compra) "
+                + "values (?,?,?,?)"
+        );
+        return new ModelAndView("redirect:/index.htm");
     }
    
     @RequestMapping(value = "remover", method = RequestMethod.GET)
@@ -248,14 +255,65 @@ public class controladorPrincipal {
         return -1;
     }
     
-    //Obtener usuario logeado
-    public ModelAndView obtenerUser(ModelAndView mvc){
+    //Añadir el username al modelo enviado
+    public ModelAndView añadirUsuarioMVC(ModelAndView mvc){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-        
         mvc.addObject("username", name);
         return mvc;
     }
     
+    public usuarioDTO obtenerUsuario(String user) {
+        final usuarioDTO usuario = new usuarioDTO();
+        
+        String sql = "SELECT * from tienda_usuario WHERE username LIKE";
+        return (usuarioDTO) plantillaJDBC.query(sql, (ResultSet rs) -> {
+            if (rs.next()) {
+                
+            }
+            return usuario;
+        });
+    }
     
+    @RequestMapping(value = "salir", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/index.htm";
+    }
+    
+    @RequestMapping(value = "acceso-denegado", method = RequestMethod.GET)
+    public ModelAndView accessDenied() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        String usuarioLogin = userDetails.getUsername();
+
+        ModelAndView model = new ModelAndView();
+        model.addObject("usuario", usuarioLogin);
+        model.setViewName("acceso-denegado");
+        return model;
+    }
+    
+    @RequestMapping(value = "error-login.htm", method = RequestMethod.GET)
+    public ModelAndView loginError(){
+        ModelAndView mvc = new ModelAndView();
+        
+        List cat = this.listaCategorias();
+        mvc.addObject("cat", cat);
+        
+        mvc.setViewName("error-login");
+        return mvc;
+    }
+    
+    public String getFecha() {
+        Calendar calendar = new GregorianCalendar();
+        Date date = calendar.getTime();
+        DateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        return formato.format(date);
+    }
 }

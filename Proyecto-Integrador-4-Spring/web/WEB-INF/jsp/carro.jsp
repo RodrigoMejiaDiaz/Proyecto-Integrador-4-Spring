@@ -131,19 +131,31 @@
                             </thead>
                             <tbody>
                                 <c:set var="total" value="0"></c:set>
-                                <c:forEach var="item" items="${sessionScope.carro }">
+                                <c:forEach var="item" items="${sessionScope.carro}">
                                     <c:set var="total"
                                            value="${total + item.producto.precio * item.cantidad }"></c:set>
                                         <tr>
-                                            <td align="center"><a
-                                                    href="remover.htm?id=${item.producto.cod_prod}"
-                                                onclick="return confirm('Are you sure?')">Remover</a></td>
-                                                <td><a href="producto.htm?cod_prod=${item.producto.cod_prod}&cod_cat=${item.producto.cod_cat_id}">${item.producto.producto }</a></td>
-                                        <td><img src="<c:out value="${item.producto.getImage()}"/>"
-                                                 width="50"></td>
-                                        <td>${item.producto.precio }</td>
-                                        <td>${item.cantidad }</td>
-                                        <td>${item.producto.precio * item.cantidad }</td>
+                                        <td align="center">
+                                            <a href="remover.htm?id=${item.producto.cod_prod }"
+                                            onclick="return confirm('¿Quieres remover el producto del carro?')">Remover</a>
+                                        </td>
+                                        <td>
+                                            <a href="producto.htm?cod_prod=${item.producto.cod_prod}&cod_cat=${item.producto.cod_cat_id}">
+                                                ${item.producto.producto }
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <img src="<c:out value="${item.producto.getImage()}"/>" width="50">
+                                        </td>
+                                        <td>
+                                            ${item.producto.precio }
+                                        </td>
+                                        <td>
+                                            ${item.cantidad }
+                                        </td>
+                                        <td>
+                                            ${item.producto.precio * item.cantidad }
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 <tr>
