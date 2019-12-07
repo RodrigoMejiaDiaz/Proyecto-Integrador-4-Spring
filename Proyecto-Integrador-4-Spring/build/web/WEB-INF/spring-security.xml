@@ -12,7 +12,7 @@
     
     <security:http auto-config="true">
         <security:intercept-url pattern="/" access="permitAll()" />
-        <security:intercept-url pattern="/index.htm" access="hasRole('ROLE_User') or hasRole('ROLE_Admin')"/>
+        <security:intercept-url pattern="/index.htm" access="hasRole('ROLE_Usuario') or hasRole('ROLE_Administrador')"/>
     </security:http>
     
     <security:authentication-manager>
