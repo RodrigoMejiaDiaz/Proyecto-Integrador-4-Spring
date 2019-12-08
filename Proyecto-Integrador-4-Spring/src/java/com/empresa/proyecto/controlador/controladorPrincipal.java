@@ -304,7 +304,7 @@ public class controladorPrincipal {
                 usuario.setEnabled(rs.getString("enabled"));
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setApellido(rs.getString("apellido"));
-                usuario.setFec_nac(rs.getDate("fec_nac"));
+                usuario.setFec_nac(rs.getString("fec_nac"));
                 usuario.setSexo(rs.getString("sexo"));
                 usuario.setCompania(rs.getString("compania"));
                 usuario.setTelefono(rs.getString("telefono"));
@@ -385,31 +385,46 @@ public class controladorPrincipal {
         return mvc;
     }
     
-    @RequestMapping(value = "registrarse", method = RequestMethod.GET)
+    @RequestMapping(value = "registrarse")
     public ModelAndView registrarse(){
-        ModelAndView mvc = new ModelAndView();
+        ModelAndView mvc = new ModelAndView("formulario");
+        List cat = this.listaCategorias();
         mvc.addObject("usuario", new usuarioDTO());
         mvc.setViewName("registrarse");
+        mvc.addObject("cat", cat);
         return mvc;
     }
     
     @RequestMapping(value = "registrarse", method = RequestMethod.POST)
-    public ModelAndView registrarse(@Valid @ModelAttribute("usuario") usuarioDTO d,
+    public ModelAndView registrarse(
+            @Valid @ModelAttribute("usuario") usuarioDTO d,
             BindingResult result,
             SessionStatus status) {
         if (result.hasErrors()) {
             ModelAndView mav = new ModelAndView("registrarse");
+            List cat = this.listaCategorias();
+            mav.addObject("cat", cat);
             return mav;
         } else {
             this.plantillaJDBC.update(
-                    "INSERT INTO datos (username,password,correo,enabled,nombre,"
+                    "INSERT INTO tienda_usuario (username,password,correo,enabled,nombre,"
                             + "apellido,fec_nac, sexo, compania, telefono, direccion, "
                             + "cod_ciud_id, estado) "
                     + "values (?,?,?,?,?,?,?,?,?,?,?,?,?)", d.getUsername(),d.getPassword(),
                     d.getCorreo(), 1, d.getNombre(), d.getApellido(), d.getFec_nac(), d.getSexo(),
-                    d.getCompania(), d.getTelefono(), d.getDireccion(), 1, 'A'
+                    d.getCompania(), d.getTelefono(), d.getDireccion(), 1, "A"
             );
-            return new ModelAndView("redirect:/index.htm");
+            return new ModelAndView("redirect:/registrarseCompleto.htm");
         }
+    }
+    
+    @RequestMapping(value = "registrarseCompleto")
+    public ModelAndView registrarseCompleto(){
+        ModelAndView mvc = new ModelAndView();
+        List cat = this.listaCategorias();
+        mvc.addObject("cat", cat);
+        mvc.addObject("usuario", new usuarioDTO());
+        mvc.setViewName("registrarseCompleto");
+        return mvc;
     }
 }

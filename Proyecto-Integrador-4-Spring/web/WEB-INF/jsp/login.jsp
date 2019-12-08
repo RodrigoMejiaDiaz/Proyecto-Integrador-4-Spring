@@ -88,7 +88,7 @@
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
                         <button type="submit" class="btn btn-primary">Ingresar</button>
-                        <a class="mx-2" href="registrar.htm">Registrarse</a>
+                        <a class="mx-2" href="registrarse.htm">Registrarse</a>
                     </form>
                 </div>
                 

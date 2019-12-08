@@ -40,7 +40,8 @@ public class usuarioDTO {
     @Pattern(regexp = "^[a-zA-Z]+.$", message = "No se admiten dígitos numéricos")
     private String apellido;
     
-    private Date fec_nac;
+    @NotEmpty(message = "Este campo no puede ser nulo")
+    private String fec_nac;
 
     private String sexo;
     
@@ -80,7 +81,7 @@ public class usuarioDTO {
         this.terms = terms;
     }
     
-    public usuarioDTO(String cod_user, String username, String password, String correo, String enabled, String nombre, String apellido, Date fec_nac, String sexo, String compania, String telefono, String direccion, String cod_ciud_id, String estado) {
+    public usuarioDTO(String cod_user, String username, String password, String correo, String enabled, String nombre, String apellido, String fec_nac, String sexo, String compania, String telefono, String direccion, String cod_ciud_id, String estado) {
         this.cod_user = cod_user;
         this.username = username;
         this.password = password;
@@ -153,11 +154,11 @@ public class usuarioDTO {
         this.apellido = apellido;
     }
 
-    public Date getFec_nac() {
+    public String getFec_nac() {
         return fec_nac;
     }
 
-    public void setFec_nac(Date fec_nac) {
+    public void setFec_nac(String fec_nac) {
         this.fec_nac = fec_nac;
     }
 

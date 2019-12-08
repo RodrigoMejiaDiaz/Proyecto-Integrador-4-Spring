@@ -1,12 +1,12 @@
 <%-- 
-    Document   : registrarse
-    Created on : Dec 7, 2019, 7:54:20 PM
+    Document   : registrarseCompleto
+    Created on : Dec 7, 2019, 9:01:01 PM
     Author     : Rodrigo
 --%>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix = "form" uri = "http://www.springframework.org/tags/form" %>
+<%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
               crossorigin="anonymous">
-        <title>Registrarse</title>
+        <title>Gracias por Comprar</title>
     </head>
     <body class="bg-light">
         <div class="sticky-top">
@@ -54,10 +54,24 @@
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto..." aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img src="images/search.svg" /> </button>
                     </form>
-                    <button class="btn" type="button">
-                        <a href="login.htm"><img src="images/user.svg" /></a>
-                    </button> 
-
+                    <c:choose>
+                        <c:when test="${username == 'anonymousUser'}">
+                            <button class="btn" type="button">
+                                <a href="login.htm"><img src="images/user.svg" /></a>
+                            </button> 
+                        </c:when>
+                        <c:otherwise>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary mx-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="images/user.svg" />
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Perfil</a>
+                                    <a class="dropdown-item" href="salir.htm">Cerrar Sesión</a>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                     <a href="carro.htm" class="mx-2" id="dropdownMenuButton">
                         <img src="images/shopping-cart.svg" />
                     </a>
@@ -71,118 +85,37 @@
                     <c:forEach items="${cat}" var="categorias">
                         <li class="nav-item">
                             <a class="nav-link border-bottom <c:if test="${cod_cat == categorias.cod_cat}" >active</c:if>"  href="categorias.htm?cod_cat=<c:out value="${categorias.cod_cat}"/>"><c:out value="${categorias.categoria}" /></a>
-                            </li>
+                        </li>
                     </c:forEach>
                 </div>
             </ul>
         </div>
-        
-    <center>
-        <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <div class="containerborder-top border-bottom border-black">
-                <h1>Registrarse</h1>
-            </div>
-            <div class="container py-4">
-                <form:form commandName="usuario" method="post">
-                    <div class="form-group row">
-                        <label class="col col-form-label">Username:</label>
-                        <div class="col">
-                            <form:input path="username" cssClass="form-control"/>
-                            <form:errors path="username" style="color:red;" />
-                        </div>
+        <div class="container my-4">
+            <div class="alert alert-success mx-auto" style="max-width: 500px;" role="alert">
+                <h1>Registro Completo</h1>
+                Te registraste exitosamente <br>
+                <a href="login.htm" class="btn btn-primary my-1">Iniciar Sesión</a> <br>
+                Si tiene alguna pregunta no dude con comunicarse con nosotros: <br>
+                <div class="card my-4 mr-5" style="width: 13rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Contáctanos</h5>
+                        <p class="card-text">
+                            Teléfono: +51 4587921<br>
+                            Dirección: Dirección 1. N°3 Avenida Trece de Mayo
+                        </p>
                     </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Password:</label>
-                        <div class="col">
-                            <form:password path="password" cssClass="form-control"/>
-                            <form:errors path="password" style="color:red;" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Correo:</label>
-                        <div class="col">
-                            <form:input path="correo" cssClass="form-control"/>
-                            <form:errors path="correo" style="color:red;" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Nombres:</label>
-                        <div class="col">
-                            <form:input path="nombre" cssClass="form-control" type="text"/>
-                            <form:errors path="nombre" style="color:red;" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Apellidos</label>
-                        <div class="col">
-                            <form:input path="apellido" cssClass="form-control" type="text"/>
-                            <form:errors path="apellido" style="color:red;" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Fecha de Nacimiento:</label>
-                        <div class="col">
-                            <form:input path="fec_nac" cssClass="form-control" type="date"/>
-                            <form:errors path="fec_nac" style="color:red;" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Sexo:</label>
-                        <div class="col">
-                            <div class="form-check form-check-inline">
-                                <form:checkbox path="sexo" cssClass="form-check-input" value="M" />Masculino
-                            </div>
-                            <div class="form-check form-check-inline"> 
-                                <form:checkbox path="sexo" cssClass="form-check-input" value="F" />Femenino
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Compañía:</label>
-                        <div class="col">
-                            <form:input path="compania" cssClass="form-control"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Teléfono:</label>
-                        <div class="col">
-                            <form:input path="telefono" cssClass="form-control" type="number"/>
-                            <form:errors path="telefono" style="color:red;" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Dirección</label>
-                        <div class="col">
-                            <form:input path="direccion" cssClass="form-control" type="text"/>
-                            <form:errors path="direccion" style="color:red;" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Términos y Condiciones:</label>
-                        <div class="col">
-                            <div class="form-check form-check-inline">
-                                <form:checkbox path="terms" cssClass="form-check-input" value="true" />Acepto
-                                <form:errors path="terms" style="color:red;" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <a href="index.htm" class="btn btn-danger" >Volver a Index</a>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
-                        <input type="submit" value="Enviar" class="btn btn-primary" />
-                    </div>
-                </form:form>
-            </div>
+                </div>
+                <a class="btn btn-danger" href="javascript:history.back(-1);" 
+                   accesskey=""title="Regresar a la pagina anterior">Volver</a>
+            </div>  
         </div>
-    </center>
-        
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
-    <footer class="container-fluid d-none d-xl-block d-lg-block" style="background-color: #e3f2fd;">
+    <footer class="container-fluid fixed-bottom d-none d-xl-block d-lg-block" style="background-color: #e3f2fd;">
         <div class="row w-100">
             <div class="col-fluid py-3 px-5">
                 <img src="images/logo.png" 
