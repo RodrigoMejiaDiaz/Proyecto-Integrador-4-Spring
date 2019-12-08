@@ -6,6 +6,9 @@
 package com.empresa.proyecto.DTO;
 
 import java.util.Date;
+import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -13,33 +16,48 @@ import java.util.Date;
  */
 public class usuarioDTO {
     private String cod_user;
-    private String username;
-    private String password;
-    private String correo;
-    private String enabled;
-    private String nombre;
-    private String apellido;
-    private String compania;
-    private String telefono;
-    private Date fec_nac;
-    private String estado;
-    private String cod_ciud_id;
-
-    public usuarioDTO(String cod_user, String username, String password, String correo, String enabled, String nombre, String apellido, String compania, String telefono, Date fec_nac, String estado, String cod_ciud_id) {
-        this.cod_user = cod_user;
-        this.username = username;
-        this.password = password;
-        this.correo = correo;
-        this.enabled = enabled;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.compania = compania;
-        this.telefono = telefono;
-        this.fec_nac = fec_nac;
-        this.estado = estado;
-        this.cod_ciud_id = cod_ciud_id;
-    }
     
+    @NotEmpty(message = "Este campo no puede ser nulo")
+    private String username;
+
+    @NotEmpty(message = "Este campo no puede ser nulo")
+    @Pattern(regexp = "^(?=.*\\d)(?=[a-zA-Z].*).{0,30}$", message = "La clave debe tener mínimo "
+            + "una letra y un dígito numérico")
+    private String password;
+    
+    @NotEmpty(message = "Este campo no puede ser nulo")
+    @Email(message = "Debe ingresar una direccion de correo valida")
+    private String correo;
+
+    private String enabled;
+    
+    @NotEmpty(message = "Este campo no puede ser nulo")
+    @Pattern(regexp = "^[a-zA-Z]+.$", message = "No se admiten dígitos numéricos")
+    private String nombre;
+    
+    @NotEmpty(message = "Este campo no puede ser nulo")
+    @Pattern(regexp = "^[a-zA-Z]+.$", message = "No se admiten dígitos numéricos")
+    private String apellido;
+    
+    private Date fec_nac;
+
+    private String sexo;
+    
+    private String compania;
+    
+    @NotEmpty(message = "Este campo no puede ser nulo")
+    @Pattern(regexp = "^[\\d]+.$", message = "Sólo se admiten dígitos numéricos")
+    private String telefono;
+    
+    @NotEmpty(message = "Este campo no puede ser nulo")
+    private String direccion;
+    
+    private String cod_ciud_id;
+    
+    private String estado;
+    
+    private String[] seleccionSexo = {"M", "F"};
+
     public usuarioDTO() {
         this.cod_user = cod_user;
         this.username = username;
@@ -48,11 +66,30 @@ public class usuarioDTO {
         this.enabled = enabled;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.fec_nac = fec_nac;
+        this.sexo = sexo;
         this.compania = compania;
         this.telefono = telefono;
-        this.fec_nac = fec_nac;
-        this.estado = estado;
+        this.direccion = direccion;
         this.cod_ciud_id = cod_ciud_id;
+        this.estado = estado;
+    }
+    
+    public usuarioDTO(String cod_user, String username, String password, String correo, String enabled, String nombre, String apellido, Date fec_nac, String sexo, String compania, String telefono, String direccion, String cod_ciud_id, String estado) {
+        this.cod_user = cod_user;
+        this.username = username;
+        this.password = password;
+        this.correo = correo;
+        this.enabled = enabled;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fec_nac = fec_nac;
+        this.sexo = sexo;
+        this.compania = compania;
+        this.telefono = telefono;
+        this.direccion = direccion;
+        this.cod_ciud_id = cod_ciud_id;
+        this.estado = estado;
     }
 
     public String getCod_user() {
@@ -111,6 +148,22 @@ public class usuarioDTO {
         this.apellido = apellido;
     }
 
+    public Date getFec_nac() {
+        return fec_nac;
+    }
+
+    public void setFec_nac(Date fec_nac) {
+        this.fec_nac = fec_nac;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
     public String getCompania() {
         return compania;
     }
@@ -127,12 +180,20 @@ public class usuarioDTO {
         this.telefono = telefono;
     }
 
-    public Date getFec_nac() {
-        return fec_nac;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setFec_nac(Date fec_nac) {
-        this.fec_nac = fec_nac;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getCod_ciud_id() {
+        return cod_ciud_id;
+    }
+
+    public void setCod_ciud_id(String cod_ciud_id) {
+        this.cod_ciud_id = cod_ciud_id;
     }
 
     public String getEstado() {
@@ -143,13 +204,16 @@ public class usuarioDTO {
         this.estado = estado;
     }
 
-    public String getCod_ciud_id() {
-        return cod_ciud_id;
+    public String[] getSeleccionSexo() {
+        return seleccionSexo;
     }
 
-    public void setCod_ciud_id(String cod_ciud_id) {
-        this.cod_ciud_id = cod_ciud_id;
+    public void setSeleccionSexo(String[] seleccionSexo) {
+        this.seleccionSexo = seleccionSexo;
     }
+
     
+
+
     
 }
