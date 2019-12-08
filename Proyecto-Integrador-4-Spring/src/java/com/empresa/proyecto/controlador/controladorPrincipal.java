@@ -321,14 +321,13 @@ public class controladorPrincipal {
         usuario.setUsername("anonymousUser");
         usuario.setPassword("");
         usuario.setCorreo("");
-        usuario.setEnabled("");
         usuario.setNombre("");
         usuario.setApellido("");
+        usuario.setFec_nac(null);
+        usuario.setSexo("");
         usuario.setCompania("");
         usuario.setTelefono("");
-        usuario.setFec_nac(null);
-        usuario.setEstado("");
-        usuario.setCod_ciud_id("");
+        usuario.setDireccion("");
         return usuario;
     }
     
@@ -392,5 +391,25 @@ public class controladorPrincipal {
         mvc.addObject("usuario", new usuarioDTO());
         mvc.setViewName("registrarse");
         return mvc;
+    }
+    
+    @RequestMapping(value = "registrarse", method = RequestMethod.POST)
+    public ModelAndView registrarse(@Valid @ModelAttribute("usuario") usuarioDTO d,
+            BindingResult result,
+            SessionStatus status) {
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("registrarse");
+            return mav;
+        } else {
+            this.plantillaJDBC.update(
+                    "INSERT INTO datos (username,password,correo,enabled,nombre,"
+                            + "apellido,fec_nac, sexo, compania, telefono, direccion, "
+                            + "cod_ciud_id, estado) "
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?)", d.getUsername(),d.getPassword(),
+                    d.getCorreo(), 1, d.getNombre(), d.getApellido(), d.getFec_nac(), d.getSexo(),
+                    d.getCompania(), d.getTelefono(), d.getDireccion(), 1, 'A'
+            );
+            return new ModelAndView("redirect:/index.htm");
+        }
     }
 }
