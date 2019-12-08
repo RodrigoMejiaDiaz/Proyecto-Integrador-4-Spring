@@ -6,6 +6,7 @@
 package com.empresa.proyecto.DTO;
 
 import java.util.Date;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -57,6 +58,9 @@ public class usuarioDTO {
     private String estado;
     
     private String[] seleccionSexo = {"M", "F"};
+    
+    @AssertTrue(message = "Este campo no puede ser nulo") //Sirve para verificar si es True
+    private boolean terms;
 
     public usuarioDTO() {
         this.cod_user = cod_user;
@@ -73,6 +77,7 @@ public class usuarioDTO {
         this.direccion = direccion;
         this.cod_ciud_id = cod_ciud_id;
         this.estado = estado;
+        this.terms = terms;
     }
     
     public usuarioDTO(String cod_user, String username, String password, String correo, String enabled, String nombre, String apellido, Date fec_nac, String sexo, String compania, String telefono, String direccion, String cod_ciud_id, String estado) {
@@ -211,9 +216,13 @@ public class usuarioDTO {
     public void setSeleccionSexo(String[] seleccionSexo) {
         this.seleccionSexo = seleccionSexo;
     }
-
     
+    public boolean getTerms() {
+        return terms;
+    }
 
+    public void setTerms(boolean terms) {
+        this.terms = terms;
+    }
 
-    
 }

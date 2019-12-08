@@ -97,53 +97,41 @@
                 <h1>Registrarse</h1>
             </div>
             <div class="container py-4">
-                <form:form modelAttribute="usuario" method="POST">
+                <form:form modelAttribute="form" method="POST">
                     <div class="form-group row">
-                        <label class="col col-form-label">Tipo de Documento:</label>
+                        <label class="col col-form-label">Username:</label>
                         <div class="col">
-                            <div class="form-check form-check-inline">
-                                <form:checkbox path="tipoDoc" cssClass="form-check-input" value="DNI" />DNI
-                            </div>
-                            <div class="form-check form-check-inline"> 
-                                <form:checkbox path="tipoDoc" cssClass="form-check-input" value="Carnet" />Carnet de Extranjero
-                            </div>
-                            <br>
-                            <form:errors path="tipoDoc" style="color:red;" />
+                            <form:input path="username" cssClass="form-control"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col col-form-label">N° de Documento</label>
+                        <label class="col col-form-label">Password:</label>
                         <div class="col">
-                            <form:input path="nroDoc" cssClass="form-control" type="number"/>
-                            <form:errors path="nroDoc" style="color:red;" />
+                            <form:input path="password" cssClass="form-control"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col col-form-label">Apellido Paterno:</label>
+                        <label class="col col-form-label">Correo:</label>
                         <div class="col">
-                            <form:input path="appelidoP" cssClass="form-control" type="text"/>
-                            <form:errors path="appelidoP" style="color:red;" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">Apellido Materno:</label>
-                        <div class="col">
-                            <form:input path="apellidoM" cssClass="form-control" type="text"/>
-                            <form:errors path="apellidoM" style="color:red;" />
+                            <form:input path="correo" cssClass="form-control"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col col-form-label">Nombres:</label>
                         <div class="col">
-                            <form:input path="nombres" cssClass="form-control" type="text"/>
-                            <form:errors path="nombres" style="color:red;" />
+                            <form:input path="nombre" cssClass="form-control" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label">Apellidos</label>
+                        <div class="col">
+                            <form:input path="apellido" cssClass="form-control" type="text"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col col-form-label">Fecha de Nacimiento:</label>
                         <div class="col">
-                            <form:input path="fechaNac" cssClass="form-control" type="date"/>
-                            <form:errors path="fechaNac" style="color:red;" />
+                            <form:input path="fec_nac" cssClass="form-control" type="date"/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -158,27 +146,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col col-form-label">Estado civil:</label>
+                        <label class="col col-form-label">Compañía:</label>
                         <div class="col">
-                            <form:select path="estadoCiv" cssClass="form-control">
-                                <form:options items="${form.getSeleccionEstadoCiv()}" />
-                            </form:select> 
+                            <form:input path="compañia" cssClass="form-control"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col col-form-label">Situación Laboral:</label>
+                        <label class="col col-form-label">Teléfono:</label>
                         <div class="col">
-                            <form:select path="situacionLab" cssClass="form-control">
-                                <form:options items="${form.getSeleccionSituacionLab()}" />
-                            </form:select> 
-                        </div>
-                        <form:errors path="situacionLab" style="color:red;" />
-                    </div>
-                    <div class="form-group row">
-                        <label class="col col-form-label">RUC del Empleador:</label>
-                        <div class="col">
-                            <form:input path="ruc" cssClass="form-control" type="number"/>
-                            <form:errors path="ruc" style="color:red;" />
+                            <form:input path="telefono" cssClass="form-control" type="number"/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -187,8 +163,6 @@
                             <div class="form-check form-check-inline">
                                 <form:checkbox path="terms" cssClass="form-check-input" value="true" />Acepto
                             </div>
-                            <form:errors path="terms" style="color:red;" />
-
                         </div>
                     </div>
                     <div class="form-group">
