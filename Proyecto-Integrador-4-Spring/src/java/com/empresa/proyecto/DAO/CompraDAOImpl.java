@@ -77,11 +77,11 @@ public class CompraDAOImpl implements CompraDAO {
         PreparedStatement ps = xcon.prepareStatement(sql);
         ps.setString(1, cod_compra);
         ps.setString(2, cod_prod);
-        ps.setString(3, monto);
-        ps.setString(4, cantidad);
+        ps.setString(3, cantidad);
+        ps.setString(4, monto);
         ps.executeUpdate();
 
-        sql = "UPDATE tienda_producto SET stock=stock-"+ cantidad +"where cod_prod=?";
+        sql = "UPDATE tienda_producto SET stock=stock-"+ Integer.parseInt(cantidad) +" WHERE cod_prod=?";
         PreparedStatement psc = xcon.prepareStatement(sql);
         psc.setString(1, cod_prod);
         psc.executeUpdate();    

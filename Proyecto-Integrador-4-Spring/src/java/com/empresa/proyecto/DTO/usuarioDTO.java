@@ -63,6 +63,9 @@ public class usuarioDTO {
     
     @AssertTrue(message = "Este campo no puede ser nulo") //Sirve para verificar si es True
     private boolean terms;
+    
+    private String[] montos;
+    private String[] cantidad;
 
     public usuarioDTO() {
         this.cod_user = cod_user;
@@ -80,9 +83,13 @@ public class usuarioDTO {
         this.cod_ciud_id = cod_ciud_id;
         this.estado = estado;
         this.terms = terms;
+        this.montos = montos;
+        this.cantidad = cantidad;
     }
     
-    public usuarioDTO(String cod_user, String username, String password, String correo, String enabled, String nombre, String apellido, String fec_nac, String sexo, String compania, String telefono, String direccion, String cod_ciud_id, String estado) {
+    public usuarioDTO(String cod_user, String username, String password, String correo, 
+            String enabled, String nombre, String apellido, String fec_nac, String sexo, 
+            String compania, String telefono, String direccion, String cod_ciud_id, String estado, String[] montos, String[] cantidad) {
         this.cod_user = cod_user;
         this.username = username;
         this.password = password;
@@ -226,5 +233,23 @@ public class usuarioDTO {
     public void setTerms(boolean terms) {
         this.terms = terms;
     }
+
+    public String[] getMontos() {
+        return montos;
+    }
+
+    public void setMontos(String[] montos) {
+        this.montos = montos;
+    }
+
+    public String[] getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(String[] cantidad) {
+        this.cantidad = cantidad;
+    }
+    
+    
 
 }
