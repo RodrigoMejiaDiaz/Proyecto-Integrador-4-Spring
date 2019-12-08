@@ -54,6 +54,24 @@
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto..." aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img src="images/search.svg" /> </button>
                     </form>
+                    <c:choose>
+                        <c:when test="${username == 'anonymousUser'}">
+                            <button class="btn" type="button">
+                                <a href="login.htm"><img src="images/user.svg" /></a>
+                            </button> 
+                        </c:when>
+                        <c:otherwise>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary mx-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="images/user.svg" />
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Perfil</a>
+                                    <a class="dropdown-item" href="salir.htm">Cerrar Sesión</a>
+                                </div>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                     <a href="carro.htm" class="mx-2" id="dropdownMenuButton">
                         <img src="images/shopping-cart.svg" />
                     </a>
@@ -67,13 +85,13 @@
                     <c:forEach items="${cat}" var="categorias">
                         <li class="nav-item">
                             <a class="nav-link border-bottom <c:if test="${cod_cat == categorias.cod_cat}" >active</c:if>"  href="categorias.htm?cod_cat=<c:out value="${categorias.cod_cat}"/>"><c:out value="${categorias.categoria}" /></a>
-                        </li>
+                            </li>
                     </c:forEach>
                 </div>
             </ul>
         </div>
         <div class="container my-4">
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success mx-auto" style="max-width: 500px;" role="alert">
                 <h1>Gracias por comprar</h1>
                 Su compra ha sido completada con éxito <br>
                 Si tiene alguna pregunta no dude con comunicarse con nosotros: <br>
@@ -89,7 +107,12 @@
                 <a class="btn btn-danger" href="javascript:history.back(-1);" 
                    accesskey=""title="Regresar a la pagina anterior">Volver</a>
             </div>  
-        </div>    
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
     <footer class="container-fluid fixed-bottom d-none d-xl-block d-lg-block" style="background-color: #e3f2fd;">
         <div class="row w-100">
