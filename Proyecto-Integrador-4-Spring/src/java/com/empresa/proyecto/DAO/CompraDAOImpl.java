@@ -71,17 +71,17 @@ public class CompraDAOImpl implements CompraDAO {
 
     public void insertarDetalle(Connection xcon, String cod_compra, String cod_prod, 
             String monto, String cantidad) throws SQLException {
-        String sql = "INSERT INTO tienda_compra_detalles ('cod_compra','cod_prod',"
-                + "'cantidad','monto')VALUES(?,?,?,?)";
+        String sql = "INSERT INTO tienda_compra_detalles (cod_compra, cod_prod,"
+                + "cantidad, monto)VALUES(?,?,?,?)";
 
         PreparedStatement ps = xcon.prepareStatement(sql);
         ps.setString(1, cod_compra);
         ps.setString(2, cod_prod);
-        ps.setInt(3, Integer.parseInt(monto));
-        ps.setInt(4, Integer.parseInt(cantidad));
+        ps.setString(3, monto);
+        ps.setString(4, cantidad);
         ps.executeUpdate();
 
-        sql = "UPDATE tienda_producto SET stock=stock-1 where cod_prod=?";
+        sql = "UPDATE tienda_producto SET stock=stock-"+ cantidad +"where cod_prod=?";
         PreparedStatement psc = xcon.prepareStatement(sql);
         psc.setString(1, cod_prod);
         psc.executeUpdate();    
