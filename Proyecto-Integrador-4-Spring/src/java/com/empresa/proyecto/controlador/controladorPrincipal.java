@@ -255,7 +255,7 @@ public class controladorPrincipal {
         }
         
         CompraDAOImpl dao = new CompraDAOImpl();
-        dao.grabarCompra(datosCompra, codigoProductos);
+        dao.grabarCompra(datosCompra, codigoProductos, montos, cantidad);
         
         
       return new ModelAndView("redirect:/index.htm");

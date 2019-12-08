@@ -19,8 +19,6 @@ public interface CompraDAO {
     
     public boolean grabarCompra(String[] datosCompra, String[] codigoProductos, 
             String[] montos, String[] cantidad);
-    public boolean insertarDetalle(String cod_compra, String[] codigoProductos, 
-            String[] montos, String[] cantidad);
 
 
 }

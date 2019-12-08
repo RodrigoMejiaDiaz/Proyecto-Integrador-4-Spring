@@ -52,7 +52,7 @@ public class CompraDAOImpl implements CompraDAO {
             
             for(int xc = 0; xc<codigoProductos.length; xc++){
                 String cod_prod = codigoProductos[xc];
-                
+                this.insertarDetalle(con, cod_compra, cod_prod, montos[xc], cantidad[xc]);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CompraDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,10 +69,22 @@ public class CompraDAOImpl implements CompraDAO {
         return formato.format(date);
     }
 
-    @Override
-    public boolean insertarDetalle(String cod_compra, String[] codigoProductos, 
-            String[] montos, String[] cantidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void insertarDetalle(Connection xcon, String cod_compra, String cod_prod, 
+            String monto, String cantidad) throws SQLException {
+        String sql = "INSERT INTO tienda_compra_detalles ('cod_compra','cod_prod',"
+                + "'cantidad','monto')VALUES(?,?,?,?)";
+
+        PreparedStatement ps = xcon.prepareStatement(sql);
+        ps.setString(1, cod_compra);
+        ps.setString(2, cod_prod);
+        ps.setInt(3, Integer.parseInt(monto));
+        ps.setInt(4, Integer.parseInt(cantidad));
+        ps.executeUpdate();
+
+        sql = "UPDATE tienda_producto SET stock=stock-1 where cod_prod=?";
+        PreparedStatement psc = xcon.prepareStatement(sql);
+        psc.setString(1, cod_prod);
+        psc.executeUpdate();    
     }
 
 
