@@ -383,4 +383,12 @@ public class controladorPrincipal {
         mvc.setViewName("compraTerminada");
         return mvc;
     }
+    
+    @RequestMapping(value = "registrarse", method = RequestMethod.GET)
+    public ModelAndView registrarse(){
+        ModelAndView mvc = new ModelAndView();
+        mvc.addObject("usuario", new usuarioDTO());
+        mvc.setViewName("registrarse");
+        return mvc;
+    }
 }

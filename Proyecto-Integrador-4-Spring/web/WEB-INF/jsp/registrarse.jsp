@@ -1,6 +1,6 @@
 <%-- 
-    Document   : compraTerminada
-    Created on : Dec 7, 2019, 7:38:22 PM
+    Document   : registrarse
+    Created on : Dec 7, 2019, 7:54:20 PM
     Author     : Rodrigo
 --%>
 
@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
               crossorigin="anonymous">
-        <title>Gracias por Comprar</title>
+        <title>Registrarse</title>
     </head>
     <body class="bg-light">
         <div class="sticky-top">
@@ -90,24 +90,116 @@
                 </div>
             </ul>
         </div>
-        <div class="container my-4">
-            <div class="alert alert-success mx-auto" style="max-width: 500px;" role="alert">
-                <h1>Gracias por comprar</h1>
-                Su compra ha sido completada con éxito <br>
-                Si tiene alguna pregunta no dude con comunicarse con nosotros: <br>
-                <div class="card my-4 mr-5" style="width: 13rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Contáctanos</h5>
-                        <p class="card-text">
-                            Teléfono: +51 4587921<br>
-                            Dirección: Dirección 1. N°3 Avenida Trece de Mayo
-                        </p>
+        
+    <center>
+        <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="containerborder-top border-bottom border-black">
+                <h1>Registrarse</h1>
+            </div>
+            <div class="container py-4">
+                <form:form modelAttribute="usuario" method="POST">
+                    <div class="form-group row">
+                        <label class="col col-form-label">Tipo de Documento:</label>
+                        <div class="col">
+                            <div class="form-check form-check-inline">
+                                <form:checkbox path="tipoDoc" cssClass="form-check-input" value="DNI" />DNI
+                            </div>
+                            <div class="form-check form-check-inline"> 
+                                <form:checkbox path="tipoDoc" cssClass="form-check-input" value="Carnet" />Carnet de Extranjero
+                            </div>
+                            <br>
+                            <form:errors path="tipoDoc" style="color:red;" />
+                        </div>
                     </div>
-                </div>
-                <a class="btn btn-danger" href="javascript:history.back(-1);" 
-                   accesskey=""title="Regresar a la pagina anterior">Volver</a>
-            </div>  
+                    <div class="form-group row">
+                        <label class="col col-form-label">N° de Documento</label>
+                        <div class="col">
+                            <form:input path="nroDoc" cssClass="form-control" type="number"/>
+                            <form:errors path="nroDoc" style="color:red;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label">Apellido Paterno:</label>
+                        <div class="col">
+                            <form:input path="appelidoP" cssClass="form-control" type="text"/>
+                            <form:errors path="appelidoP" style="color:red;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label">Apellido Materno:</label>
+                        <div class="col">
+                            <form:input path="apellidoM" cssClass="form-control" type="text"/>
+                            <form:errors path="apellidoM" style="color:red;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label">Nombres:</label>
+                        <div class="col">
+                            <form:input path="nombres" cssClass="form-control" type="text"/>
+                            <form:errors path="nombres" style="color:red;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label">Fecha de Nacimiento:</label>
+                        <div class="col">
+                            <form:input path="fechaNac" cssClass="form-control" type="date"/>
+                            <form:errors path="fechaNac" style="color:red;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label">Sexo:</label>
+                        <div class="col">
+                            <div class="form-check form-check-inline">
+                                <form:checkbox path="sexo" cssClass="form-check-input" value="Masculino" />Masculino
+                            </div>
+                            <div class="form-check form-check-inline"> 
+                                <form:checkbox path="sexo" cssClass="form-check-input" value="Fenenino" />Femenino
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label">Estado civil:</label>
+                        <div class="col">
+                            <form:select path="estadoCiv" cssClass="form-control">
+                                <form:options items="${form.getSeleccionEstadoCiv()}" />
+                            </form:select> 
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label">Situación Laboral:</label>
+                        <div class="col">
+                            <form:select path="situacionLab" cssClass="form-control">
+                                <form:options items="${form.getSeleccionSituacionLab()}" />
+                            </form:select> 
+                        </div>
+                        <form:errors path="situacionLab" style="color:red;" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label">RUC del Empleador:</label>
+                        <div class="col">
+                            <form:input path="ruc" cssClass="form-control" type="number"/>
+                            <form:errors path="ruc" style="color:red;" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col col-form-label">Términos y Condiciones:</label>
+                        <div class="col">
+                            <div class="form-check form-check-inline">
+                                <form:checkbox path="terms" cssClass="form-check-input" value="true" />Acepto
+                            </div>
+                            <form:errors path="terms" style="color:red;" />
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a href="index.htm" class="btn btn-primary" >Volver a Index</a>
+                        <input type="submit" value="Enviar" class="btn btn-primary" />
+                    </div>
+                </form:form>
+            </div>
         </div>
+    </center>
+        
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
