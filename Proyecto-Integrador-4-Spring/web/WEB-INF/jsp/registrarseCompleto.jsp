@@ -54,24 +54,9 @@
                         <input class="form-control mr-sm-2" type="search" placeholder="Buscar producto..." aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img src="images/search.svg" /> </button>
                     </form>
-                    <c:choose>
-                        <c:when test="${username == 'anonymousUser'}">
-                            <button class="btn" type="button">
-                                <a href="login.htm"><img src="images/user.svg" /></a>
-                            </button> 
-                        </c:when>
-                        <c:otherwise>
-                            <div class="dropdown">
-                                <button class="btn btn-outline-secondary mx-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="images/user.svg" />
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Perfil</a>
-                                    <a class="dropdown-item" href="salir.htm">Cerrar Sesión</a>
-                                </div>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
+                        <button class="btn" type="button">
+                            <a href="login.htm"><img src="images/user.svg" /></a>
+                        </button> 
                     <a href="carro.htm" class="mx-2" id="dropdownMenuButton">
                         <img src="images/shopping-cart.svg" />
                     </a>

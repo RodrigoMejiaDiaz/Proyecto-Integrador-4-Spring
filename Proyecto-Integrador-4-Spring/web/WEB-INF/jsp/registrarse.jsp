@@ -89,6 +89,7 @@
                         <div class="col">
                             <form:input path="username" cssClass="form-control"/>
                             <form:errors path="username" style="color:red;" />
+                            <small id="emailHelp" class="form-text text-muted">El username debe ser el mismo que el correo.</small>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -96,6 +97,8 @@
                         <div class="col">
                             <form:password path="password" cssClass="form-control"/>
                             <form:errors path="password" style="color:red;" />
+                            <small id="emailHelp" class="form-text text-muted">La contraseña debe empezar con una letra y debe
+                            tener mínimo una letra y un número.</small>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -141,6 +144,7 @@
                         <label class="col col-form-label">Compañía:</label>
                         <div class="col">
                             <form:input path="compania" cssClass="form-control"/>
+                            <small id="emailHelp" class="form-text text-muted">Si no está asociada a una empresa, puede dejarlo en blanco.</small>
                         </div>
                     </div>
                     <div class="form-group row">

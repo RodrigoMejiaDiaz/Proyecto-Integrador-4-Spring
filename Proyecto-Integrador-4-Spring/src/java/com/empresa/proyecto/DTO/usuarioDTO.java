@@ -19,6 +19,7 @@ public class usuarioDTO {
     private String cod_user;
     
     @NotEmpty(message = "Este campo no puede ser nulo")
+    @Email(message = "El nombre de usuario y el correo deben de ser el mismo")
     private String username;
 
     @NotEmpty(message = "Este campo no puede ser nulo")
