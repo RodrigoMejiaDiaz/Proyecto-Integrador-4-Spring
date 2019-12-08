@@ -256,7 +256,8 @@ public class controladorPrincipal {
         
         CompraDAOImpl dao = new CompraDAOImpl();
         dao.grabarCompra(datosCompra, codigoProductos, montos, cantidad);
-        
+        List<itemDTO> carroNuevo = new ArrayList<>();
+        session.setAttribute("carro", carroNuevo);
         
       return new ModelAndView("redirect:/index.htm");
     }
