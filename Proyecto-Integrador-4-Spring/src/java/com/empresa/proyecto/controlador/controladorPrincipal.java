@@ -259,7 +259,7 @@ public class controladorPrincipal {
         List<itemDTO> carroNuevo = new ArrayList<>();
         session.setAttribute("carro", carroNuevo);
         
-      return new ModelAndView("redirect:/index.htm");
+      return new ModelAndView("redirect:/compraTerminada.htm");
     }
    
     @RequestMapping(value = "remover", method = RequestMethod.GET)
@@ -374,4 +374,13 @@ public class controladorPrincipal {
         return mvc;
     }  
  
+    @RequestMapping(value = "compraTerminada.htm", method = RequestMethod.GET)
+    public ModelAndView compraTerminada() {
+        ModelAndView mvc = new ModelAndView();
+        List cat = this.listaCategorias();
+        mvc.addObject("cat", cat);
+        mvc = this.añadirUsuarioMVC(mvc);
+        mvc.setViewName("compraTerminada");
+        return mvc;
+    }
 }

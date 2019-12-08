@@ -37,6 +37,7 @@
                 <prop key="confirm_comprar.htm">controladorPrincipal</prop>
                 <prop key="login.htm">controladorPrincipal</prop>
                 <prop key="error-login.htm">controladorPrincipal</prop>
+                <prop key="compraTerminada.htm">controladorPrincipal</prop>
             </props>
         </property>
     </bean>
