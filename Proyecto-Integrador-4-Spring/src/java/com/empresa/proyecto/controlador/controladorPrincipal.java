@@ -304,11 +304,13 @@ public class controladorPrincipal {
                 usuario.setEnabled(rs.getString("enabled"));
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setApellido(rs.getString("apellido"));
+                usuario.setFec_nac(rs.getDate("fec_nac"));
+                usuario.setSexo(rs.getString("sexo"));
                 usuario.setCompania(rs.getString("compania"));
                 usuario.setTelefono(rs.getString("telefono"));
-                usuario.setFec_nac(rs.getDate("fec_nac"));
-                usuario.setEstado(rs.getString("estado"));
+                usuario.setDireccion(rs.getString("direccion"));
                 usuario.setCod_ciud_id(rs.getString("cod_ciud_id"));
+                usuario.setEstado(rs.getString("estado"));
             }
             return usuario;
         });
