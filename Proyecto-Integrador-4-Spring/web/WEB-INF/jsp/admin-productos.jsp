@@ -102,7 +102,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <a href="" class="btn btn-success my-3">Insertar</a>
+                <a href="agregar-productos.htm" class="btn btn-success my-3">Insertar</a>
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                         <tr>

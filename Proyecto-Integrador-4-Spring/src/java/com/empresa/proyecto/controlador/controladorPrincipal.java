@@ -453,6 +453,25 @@ public class controladorPrincipal {
         return mvc;
     }
     
+    @RequestMapping(value = "agregar-productos", method = RequestMethod.GET)
+    public ModelAndView agregar_productos(){
+        ModelAndView mvc = new ModelAndView();
+        List cat = this.listaCategorias();
+        mvc.addObject("cat", cat);
+        mvc = this.añadirUsuarioMVC(mvc);
+        
+        String sql = "SELECT * FROM tienda_proveedor";
+        List proveedores = this.plantillaJDBC.queryForList(sql);
+        
+        mvc.addObject("productos", new productoDTO());
+        mvc.addObject("proveedores", proveedores);
+        
+        mvc.setViewName("agregar-productos");
+        
+        return mvc;        
+    }
+    
+    
     @RequestMapping(value = "admin-categorias")
     public ModelAndView admin_categorias(){
         ModelAndView mvc = new ModelAndView();

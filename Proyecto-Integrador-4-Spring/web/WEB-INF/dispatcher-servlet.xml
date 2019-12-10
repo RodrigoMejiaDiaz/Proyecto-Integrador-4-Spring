@@ -43,6 +43,7 @@
                 <prop key="registrarse.htm">controladorPrincipal</prop>
                 <prop key="registrarseCompleto.htm">controladorPrincipal</prop>
                 <prop key="admin-productos.htm">controladorPrincipal</prop>
+                <prop key="agregar-productos.htm">controladorPrincipal</prop>
                 <prop key="admin-categorias.htm">controladorPrincipal</prop>
             </props>
         </property>
