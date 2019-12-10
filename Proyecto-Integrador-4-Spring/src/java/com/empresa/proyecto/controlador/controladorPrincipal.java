@@ -437,7 +437,7 @@ public class controladorPrincipal {
         ModelAndView mvc = new ModelAndView();
         List cat = this.listaCategorias();
         mvc.addObject("cat", cat);
-        mvc.addObject("usuario", new usuarioDTO());
+        mvc = this.añadirUsuarioMVC(mvc);
         
         String sql = "SELECT * FROM tienda_producto";
         List productos = this.plantillaJDBC.queryForList(sql);
