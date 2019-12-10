@@ -173,7 +173,7 @@ public class controladorPrincipal {
    
    public productoDTO seleccionarProducto(String cod_prod){
        final productoDTO producto = new productoDTO();
-       String sql = "SELECT cod_prod, producto, descripcion, precio, stock, cod_cat_id, image FROM tienda_producto WHERE cod_prod=" + cod_prod;
+       String sql = "SELECT * FROM tienda_producto WHERE cod_prod=" + cod_prod;
        return (productoDTO) plantillaJDBC.query(sql, (ResultSet rs) -> {
            if (rs.next()) {
                producto.setCod_prod(rs.getString("cod_prod"));
@@ -181,6 +181,8 @@ public class controladorPrincipal {
                producto.setDescripcion(rs.getString("descripcion"));
                producto.setPrecio(Integer.parseInt(rs.getString("precio")));
                producto.setStock(Integer.parseInt(rs.getString("stock")));
+               producto.setCod_prov_id(Integer.parseInt(rs.getString("cod_prov_id")));
+               producto.setDestacado(rs.getString("destacado"));
                producto.setCod_cat_id(Integer.parseInt(rs.getString("cod_cat_id")));
                producto.setImage(rs.getString("image"));
            }
@@ -436,7 +438,18 @@ public class controladorPrincipal {
         List cat = this.listaCategorias();
         mvc.addObject("cat", cat);
         mvc.addObject("usuario", new usuarioDTO());
+        
+        String sql = "SELECT * FROM tienda_producto";
+        List productos = this.plantillaJDBC.queryForList(sql);
+        
+        String sql2 = "SELECT * FROM tienda_proveedor";
+        List proveedores = this.plantillaJDBC.queryForList(sql2);
+        
+        mvc.addObject("productos", productos);
+        mvc.addObject("proveedores", proveedores);
+        
         mvc.setViewName("admin-productos");
+
         return mvc;
     }
     
