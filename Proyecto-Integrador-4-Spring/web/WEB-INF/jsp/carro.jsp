@@ -124,19 +124,19 @@
                                             <img src="<c:out value="${item.producto.getImage()}"/>" width="50">
                                         </td>
                                         <td>
-                                            ${item.producto.precio }
+                                            S/.${item.producto.precio }
                                         </td>
                                         <td>
                                             <form:hidden path="cantidad" value="${item.cantidad }" />${item.cantidad }
                                         </td>
                                         <td>
-                                            <form:hidden path="montos" value="${item.producto.precio * item.cantidad }" />${item.producto.precio * item.cantidad }
+                                            <form:hidden path="montos" value="${item.producto.precio * item.cantidad }" />S/.${item.producto.precio * item.cantidad }
                                         </td>
                                     </tr>
                                 </c:forEach>
                                 <tr>
                                     <td colspan="5" align="right">Total</td>
-                                    <td>${total }</td>
+                                    <td>S/.${total }</td>
                                 </tr>
                                 <c:forEach var="usuario" items="${sessionScope.usuario}">
                                     <form:hidden path="cod_user" value="${usuario.cod_user}" />
