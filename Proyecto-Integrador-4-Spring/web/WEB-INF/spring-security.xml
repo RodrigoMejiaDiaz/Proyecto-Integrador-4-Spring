@@ -14,6 +14,7 @@
         <security:intercept-url pattern="/" access="permitAll()" />
         <security:intercept-url pattern="/comprar.htm" access="hasRole('ROLE_Usuario') or hasRole('ROLE_Administrador')"/>
         <security:intercept-url pattern="/admin-productos.htm" access="hasRole('ROLE_Administrador')"/>
+        <security:intercept-url pattern="/admin-categorias.htm" access="hasRole('ROLE_Administrador')"/>
         <security:logout logout-url="/salir.htm" logout-success-url="/index.jsp" />
         <security:access-denied-handler error-page="/acceso-denegado.htm" />
         <security:form-login login-page="/login.htm" default-target-url="/index.htm"
