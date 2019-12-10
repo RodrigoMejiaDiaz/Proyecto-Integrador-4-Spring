@@ -1,17 +1,17 @@
 <%-- 
-    Document   : salir
-    Created on : Dec 6, 2019, 8:15:49 PM
+    Document   : admin-categorias
+    Created on : Dec 10, 2019, 3:24:36 PM
     Author     : Rodrigo
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Salir</title>
+        <title>Administrar categorías</title>
     </head>
     <body>
-        <h1>Esta página no sirve</h1>
+        <h1>Hello World!</h1>
     </body>
 </html>

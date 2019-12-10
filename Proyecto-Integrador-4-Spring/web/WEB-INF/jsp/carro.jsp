@@ -41,6 +41,14 @@
                         <li class="nav-item">
                             <a class="nav-link border-bottom" href="#">Ubícanos</a>
                         </li>
+                        <c:if test="${rol == '[ROLE_Administrador]'}">
+                            <li class="nav-item">
+                                <a class="nav-link border-bottom" href="admin-productos.htm">Administrar productos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link border-bottom" href="admin-categorias.htm">Administrar categorías</a>
+                            </li>
+                        </c:if>
                         <li class="nav-item dropdown d-xl-none d-lg-none">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categorías</a>
                             <div class="dropdown-menu">

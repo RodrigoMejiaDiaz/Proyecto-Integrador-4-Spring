@@ -173,7 +173,7 @@ public class controladorPrincipal {
    
    public productoDTO seleccionarProducto(String cod_prod){
        final productoDTO producto = new productoDTO();
-       String sql = "SELECT * FROM tienda_producto WHERE cod_prod=" + cod_prod;
+       String sql = "SELECT cod_prod, producto, descripcion, precio, stock, cod_cat_id, image FROM tienda_producto WHERE cod_prod=" + cod_prod;
        return (productoDTO) plantillaJDBC.query(sql, (ResultSet rs) -> {
            if (rs.next()) {
                producto.setCod_prod(rs.getString("cod_prod"));
@@ -285,7 +285,9 @@ public class controladorPrincipal {
     public ModelAndView añadirUsuarioMVC(ModelAndView mvc){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
+        String role = auth.getAuthorities().toString();
         mvc.addObject("username", name);
+        mvc.addObject("rol", role);
         return mvc;
     }
     
@@ -425,6 +427,26 @@ public class controladorPrincipal {
         mvc.addObject("cat", cat);
         mvc.addObject("usuario", new usuarioDTO());
         mvc.setViewName("registrarseCompleto");
+        return mvc;
+    }
+    
+    @RequestMapping(value = "admin-productos")
+    public ModelAndView admin_productos(){
+        ModelAndView mvc = new ModelAndView();
+        List cat = this.listaCategorias();
+        mvc.addObject("cat", cat);
+        mvc.addObject("usuario", new usuarioDTO());
+        mvc.setViewName("admin-productos");
+        return mvc;
+    }
+    
+    @RequestMapping(value = "admin-categorias")
+    public ModelAndView admin_categorias(){
+        ModelAndView mvc = new ModelAndView();
+        List cat = this.listaCategorias();
+        mvc.addObject("cat", cat);
+        mvc.addObject("usuario", new usuarioDTO());
+        mvc.setViewName("admin-categorias");
         return mvc;
     }
 }
