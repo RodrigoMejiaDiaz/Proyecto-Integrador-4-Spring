@@ -45,8 +45,9 @@
                 <prop key="admin-productos.htm">controladorPrincipal</prop>
                 <prop key="agregar-productos.htm">controladorPrincipal</prop>
                 <prop key="editar-producto.htm">controladorPrincipal</prop>
-                <prop key="admin-categorias.htm">controladorPrincipal</prop>
                 <prop key="resultado-agregar-productos.htm">controladorPrincipal</prop>
+                <prop key="admin-compras.htm">controladorPrincipal</prop>
+                <prop key="admin-compras-detalles.htm">controladorPrincipal</prop>
             </props>
         </property>
     </bean>

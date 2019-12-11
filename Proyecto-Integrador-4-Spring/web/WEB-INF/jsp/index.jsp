@@ -41,7 +41,7 @@
                                 <a class="nav-link border-bottom" href="admin-productos.htm">Administrar productos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link border-bottom" href="admin-categorias.htm">Administrar categorías</a>
+                                <a class="nav-link border-bottom" href="admin-compras.htm">Administrar compras</a>
                             </li>
                         </c:if>
                         <li class="nav-item dropdown d-xl-none d-lg-none">

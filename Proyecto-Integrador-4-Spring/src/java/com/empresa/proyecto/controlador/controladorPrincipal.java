@@ -591,13 +591,46 @@ public class controladorPrincipal {
         }
     }
     
-    @RequestMapping(value = "admin-categorias")
-    public ModelAndView admin_categorias(){
+    @RequestMapping(value = "admin-compras")
+    public ModelAndView admin_compras(){
         ModelAndView mvc = new ModelAndView();
         List cat = this.listaCategorias();
         mvc.addObject("cat", cat);
-        mvc.addObject("usuario", new usuarioDTO());
-        mvc.setViewName("admin-categorias");
+        mvc = this.añadirUsuarioMVC(mvc);
+
+        String sql = "SELECT * FROM tienda_compra";
+        List compras = this.plantillaJDBC.queryForList(sql);
+
+        String sql2 = "SELECT * FROM tienda_proveedor";
+        List proveedores = this.plantillaJDBC.queryForList(sql2);
+
+        mvc.addObject("compras", compras);
+        mvc.addObject("proveedores", proveedores);
+
+        mvc.setViewName("admin-compras");
+
+        return mvc;
+    }
+    @RequestMapping(value = "admin-compras-detalles")
+    public ModelAndView admin_compras_detalles(HttpServletRequest request){
+        ModelAndView mvc = new ModelAndView();
+        List cat = this.listaCategorias();
+        mvc.addObject("cat", cat);
+        mvc = this.añadirUsuarioMVC(mvc);
+        
+        String id = request.getParameter("id");
+
+        String sql = "SELECT * FROM tienda_compra_detalles WHERE cod_compra=?"+id;
+        List compras = this.plantillaJDBC.queryForList(sql);
+
+        String sql2 = "SELECT * FROM tienda_proveedor";
+        List proveedores = this.plantillaJDBC.queryForList(sql2);
+
+        mvc.addObject("compras", compras);
+        mvc.addObject("proveedores", proveedores);
+
+        mvc.setViewName("admin-compras");
+
         return mvc;
     }
 }

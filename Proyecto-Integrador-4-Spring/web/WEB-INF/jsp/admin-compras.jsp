@@ -1,6 +1,6 @@
 <%-- 
-    Document   : agregar-productos
-    Created on : Dec 10, 2019, 5:02:01 PM
+    Document   : admin-categorias
+    Created on : Dec 10, 2019, 3:24:36 PM
     Author     : Rodrigo
 --%>
 
@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
               crossorigin="anonymous">
-        <title>Agregar producto</title>
+        <title>Administrar compras</title>
     </head>
     <body>
         <div class="sticky-top">
@@ -100,91 +100,38 @@
                 </div>
             </ul>
         </div>
-        
         <div class="container">
-            <h1>Añadir producto</h1>
-            <form:form enctype="multipart/form-data" method="POST" commandName="productos" action="resultado-agregar-productos.htm">
-                <div class="form-group row">
-                    <form:label path="producto" cssClass="col-sm-2 col-form-label">Nombre de producto:</form:label>
-                    <div class="col-sm-10">
-                    <form:input path="producto" type="text"  cssClass="form-control"/>
-                    <form:errors path="producto" style="color:red;" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <form:label path="descripcion" cssClass="col-sm-2 col-form-label">Descripción:</form:label>
-                    <div class="col-sm-10">
-                    <form:input path="descripcion" type="text"  cssClass="form-control"/>
-                    <form:errors path="descripcion" style="color:red;" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <form:label path="precio" cssClass="col-sm-2 col-form-label">Precio:</form:label>
-                    <div class="col-sm-10">
-                    <form:input path="precio" type="number"  cssClass="form-control"/>
-                    <form:errors path="precio" style="color:red;" />
-                    </div>
-                </div> 
-                <div class="form-group row">
-                    <form:label path="image" cssClass="col-sm-2 col-form-label">Imagen:</form:label>
-                    <div class="col-sm-10">
-                        <div class="custom-file">
-                            <input type="file" name="file" class="custom-file-input" id="customFile" />
-                            <label class="custom-file-label" for="customFile">Escoger una imagen</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <form:label path="stock" cssClass="col-sm-2 col-form-label">Stock:</form:label>
-                    <div class="col-sm-10">
-                    <form:input path="stock" type="number"  cssClass="form-control"/>
-                    <form:errors path="stock" style="color:red;" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <form:label path="cod_cat_id" cssClass="col-sm-2 col-form-label">Categoría:</form:label>
-                    <div class="col-sm-10">
-                    <form:select path="cod_cat_id" cssClass="form-control">
-                        <c:forEach items="${cat}" var="categoria">
-                            <form:option value="${categoria.cod_cat}">${categoria.categoria}</form:option>
+            <div class="row">
+                <a href="" class="btn btn-success my-3">Insertar</a>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <td>Código compra</td>
+                            <td>Código usuario</td>
+                            <td>Fecha de compra</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${compras}" var="compra">
+                            <tr>
+                                <td><a href="<c:url value="admin-compras-detalles.htm?id=${compra.cod_compra}"/>"><c:out value="${compra.cod_compra}"/></a></td>
+                                <td><c:out value="${compra.cod_user}"/></td>
+                                <td><c:out value="${compra.fecha_compra}"/></td>
+                                <td>S/.<c:out value="${compra.total}"/></td>
+                                <td>
+                                    <a href=""
+                                       class="btn btn-primary">Editar</a>
+                                    <a href=""
+                                       class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
                         </c:forEach>
-                    </form:select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <form:label path="cod_prov_id" cssClass="col-sm-2 col-form-label">Proveedor:</form:label>
-                    <div class="col-sm-10">
-                    <form:select path="cod_prov_id" cssClass="form-control">
-                        <c:forEach items="${proveedores}" var="proveedor">
-                            <form:option value="${proveedor.cod_prov}">${proveedor.proveedor}</form:option>
-                        </c:forEach>
-                    </form:select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <form:label path="destacado" cssClass="col-sm-2 col-form-label">Destacado:</form:label>
-                    <div class="col-sm-10">
-                    <form:select path="destacado" cssClass="form-control">
-                        <form:options items="${productos.getSeleccionEstado()}"/>
-                    </form:select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <form:label path="estado" cssClass="col-sm-2 col-form-label">Estado:</form:label>
-                    <div class="col-sm-10">
-                    <form:select path="estado" cssClass="form-control">
-                        <form:options items="${productos.getSeleccionEstado()}"/>
-                    </form:select>
-                    </div>
-                </div>
-                    <div class="form-group">
-                        <input type="submit" value="Enviar" class="btn btn-primary"/>
-                        <a href="admin-productos.htm" class="btn btn-primary">Volver</a>
-                    </div>
-            </form:form>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+                    </tbody>
+                </table>
+            </div>
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </body>
 </html>

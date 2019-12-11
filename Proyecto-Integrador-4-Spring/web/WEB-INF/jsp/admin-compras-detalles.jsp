@@ -1,12 +1,11 @@
 <%-- 
-    Document   : admin-categorias
-    Created on : Dec 10, 2019, 3:24:36 PM
+    Document   : admin-compras-detalles
+    Created on : Dec 10, 2019, 11:10:14 PM
     Author     : Rodrigo
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -15,7 +14,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
               crossorigin="anonymous">
-        <title>Administrar categorías</title>
+        <title>Administrar compras</title>
     </head>
     <body>
         <div class="sticky-top">
@@ -46,7 +45,7 @@
                                 <a class="nav-link border-bottom" href="admin-productos.htm">Administrar productos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link border-bottom" href="admin-categorias.htm">Administrar categorías</a>
+                                <a class="nav-link border-bottom" href="admin-compras.htm">Administrar compras</a>
                             </li>
                         </c:if>
                         <li class="nav-item dropdown d-xl-none d-lg-none">
@@ -100,38 +99,38 @@
                 </div>
             </ul>
         </div>
-
-        <footer class="container-fluid" style="background-color: #e3f2fd;">
-            <div class="row w-100">
-                <div class="col-fluid py-3 px-5">
-                    <img src="images/logo.png" 
-                         width="70" height="70" class="d-inline-block align-top img-thumbnail" alt="Logo">
-                </div>
-                <div class="col-fluid m-2 pr-5">
-                    <h4>IME</h4>
-                    <a href="" class="text-decoration-none">Sobre nosotros</a><br>
-                    <a href="" class="text-decoration-none">Ubícanos</a><br>
-                    <a href="" class="text-decoration-none">Contacto</a><br>
-                </div>
-                <div class="col-fluid m-2 pr-5">
-                    <h4>Horario</h4>
-                    <p>Lunes a viernes 9:00 a 16:30</p>
-                </div>
-                <div class="col-fluid m-2 pr-5">
-                    <h4>Información</h4>
-                    <a href="" class="text-decoration-none">Condiciones</a><br>
-                    <a href="" class="text-decoration-none">Comerciales</a><br>
-                    <a href="" class="text-decoration-none">Política de privacidad</a><br>
-                </div>
+        <div class="container">
+            <div class="row">
+                <a href="" class="btn btn-success my-3">Insertar</a>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <td>Código compra</td>
+                            <td>Código usuario</td>
+                            <td>Fecha de compra</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${compras}" var="compra">
+                            <tr>
+                                <td><a href="<c:url value="admin-compras-detalles.htm?id=${compra.cod_compra}"/>"><c:out value="${compra.cod_compra}"/></a></td>
+                                <td><c:out value="${compra.cod_user}"/></td>
+                                <td><c:out value="${compra.fecha_compra}"/></td>
+                                <td>S/.<c:out value="${compra.total}"/></td>
+                                <td>
+                                    <a href=""
+                                       class="btn btn-primary">Editar</a>
+                                    <a href=""
+                                       class="btn btn-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </div>
-        </footer>
-        <script>
-            $('#bs4-multi-slide-carousel').carousel({
-              interval: 400
-            });
-        </script>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </body>
 </html>
