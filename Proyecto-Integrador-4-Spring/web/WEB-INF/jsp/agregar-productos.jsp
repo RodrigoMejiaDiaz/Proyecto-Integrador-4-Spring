@@ -180,30 +180,6 @@
             </form:form>
         </div>
 
-        <footer class="container-fluid" style="background-color: #e3f2fd;">
-            <div class="row w-100">
-                <div class="col-fluid py-3 px-5">
-                    <img src="images/logo.png" 
-                         width="70" height="70" class="d-inline-block align-top img-thumbnail" alt="Logo">
-                </div>
-                <div class="col-fluid m-2 pr-5">
-                    <h4>IME</h4>
-                    <a href="" class="text-decoration-none">Sobre nosotros</a><br>
-                    <a href="" class="text-decoration-none">Ubícanos</a><br>
-                    <a href="" class="text-decoration-none">Contacto</a><br>
-                </div>
-                <div class="col-fluid m-2 pr-5">
-                    <h4>Horario</h4>
-                    <p>Lunes a viernes 9:00 a 16:30</p>
-                </div>
-                <div class="col-fluid m-2 pr-5">
-                    <h4>Información</h4>
-                    <a href="" class="text-decoration-none">Condiciones</a><br>
-                    <a href="" class="text-decoration-none">Comerciales</a><br>
-                    <a href="" class="text-decoration-none">Política de privacidad</a><br>
-                </div>
-            </div>
-        </footer>
         <script>
             $('#bs4-multi-slide-carousel').carousel({
               interval: 400

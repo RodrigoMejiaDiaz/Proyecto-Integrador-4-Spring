@@ -151,41 +151,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-        
-        
-        
-        
-                            
-                            <footer class="container-fluid" style="background-color: #e3f2fd;">
-                                <div class="row w-100">
-                                    <div class="col-fluid py-3 px-5">
-                                        <img src="images/logo.png" 
-                                             width="70" height="70" class="d-inline-block align-top img-thumbnail" alt="Logo">
-                                    </div>
-                                    <div class="col-fluid m-2 pr-5">
-                                        <h4>IME</h4>
-                                        <a href="" class="text-decoration-none">Sobre nosotros</a><br>
-                                        <a href="" class="text-decoration-none">Ubícanos</a><br>
-                                        <a href="" class="text-decoration-none">Contacto</a><br>
-                                    </div>
-                                    <div class="col-fluid m-2 pr-5">
-                                        <h4>Horario</h4>
-                                        <p>Lunes a viernes 9:00 a 16:30</p>
-                                    </div>
-                                    <div class="col-fluid m-2 pr-5">
-                                        <h4>Información</h4>
-                                        <a href="" class="text-decoration-none">Condiciones</a><br>
-                                        <a href="" class="text-decoration-none">Comerciales</a><br>
-                                        <a href="" class="text-decoration-none">Política de privacidad</a><br>
-                                    </div>
-                                </div>
-                            </footer>
-                            <script>
-                                $('#bs4-multi-slide-carousel').carousel({
-                                  interval: 400
-                                });
-                            </script>
                             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
                             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
                             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

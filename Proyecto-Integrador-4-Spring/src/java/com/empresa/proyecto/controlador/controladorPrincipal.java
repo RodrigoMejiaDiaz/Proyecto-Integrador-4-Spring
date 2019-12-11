@@ -483,13 +483,10 @@ public class controladorPrincipal {
     
     @RequestMapping(value = "resultado-agregar-productos.htm", method = RequestMethod.POST)
     public ModelAndView resultado_agregar_productos(@ModelAttribute productoDTO d,HttpServletRequest request) throws IOException, ServletException{
-        
-        ModelAndView mvc = new ModelAndView("resultado");
         conexion xcon = new conexion();
         String cod_prod = xcon.generarCodigo("tienda_producto", "cod_prod");
         
         String savePath = "C:\\Users\\Rodrigo\\Documents\\NetBeansProjects\\Proyecto-Integrador-4-Spring\\Proyecto-Integrador-4-Spring\\web" + File.separator + SAVE_DIR_PROD;
-        File fileSaveDir = new File(savePath);
         Part part = request.getPart("file");
         String fileName = extractFileName(part);
         part.write(fileName);
@@ -513,6 +510,15 @@ public class controladorPrincipal {
             }
         }
         return "";
+    }
+    
+    @RequestMapping(value = "eliminar-producto", method = RequestMethod.GET)
+    public ModelAndView eliminar_producto(@ModelAttribute("productos") productoDTO d,
+            HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        this.plantillaJDBC.update("DELETE FROM tienda_producto WHERE "
+                + "cod_prod=?", id);
+        return new ModelAndView("redirect:/admin-productos.htm");
     }
     
     
