@@ -601,11 +601,7 @@ public class controladorPrincipal {
         String sql = "SELECT * FROM tienda_compra";
         List compras = this.plantillaJDBC.queryForList(sql);
 
-        String sql2 = "SELECT * FROM tienda_proveedor";
-        List proveedores = this.plantillaJDBC.queryForList(sql2);
-
         mvc.addObject("compras", compras);
-        mvc.addObject("proveedores", proveedores);
 
         mvc.setViewName("admin-compras");
 
@@ -620,16 +616,16 @@ public class controladorPrincipal {
         
         String id = request.getParameter("id");
 
-        String sql = "SELECT * FROM tienda_compra_detalles WHERE cod_compra=?"+id;
+        String sql = "SELECT * FROM tienda_compra_detalles WHERE cod_compra="+id;
         List compras = this.plantillaJDBC.queryForList(sql);
 
-        String sql2 = "SELECT * FROM tienda_proveedor";
-        List proveedores = this.plantillaJDBC.queryForList(sql2);
+        String sql2 = "SELECT * FROM tienda_producto";
+        List productos = this.plantillaJDBC.queryForList(sql2);
 
         mvc.addObject("compras", compras);
-        mvc.addObject("proveedores", proveedores);
+        mvc.addObject("productos", productos);
 
-        mvc.setViewName("admin-compras");
+        mvc.setViewName("admin-compras-detalles");
 
         return mvc;
     }

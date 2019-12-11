@@ -106,18 +106,25 @@
                     <thead>
                         <tr>
                             <td>Código compra</td>
-                            <td>Código usuario</td>
-                            <td>Fecha de compra</td>
-                            <td>Total</td>
+                            <td>Producto</td>
+                            <td>Cantidad</td>
+                            <td>Monto</td>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${compras}" var="compra">
                             <tr>
-                                <td><a href="<c:url value="admin-compras-detalles.htm?id=${compra.cod_compra}"/>"><c:out value="${compra.cod_compra}"/></a></td>
-                                <td><c:out value="${compra.cod_user}"/></td>
-                                <td><c:out value="${compra.fecha_compra}"/></td>
-                                <td>S/.<c:out value="${compra.total}"/></td>
+                                <td><c:out value="${compra.cod_compra}"/></td>
+                                <c:forEach items="${productos}" var="producto">
+                                    <c:if test="${compra.cod_prod == producto.cod_prod}" >
+                                        <td><a class="nav-link border-bottom" 
+                                               href="<c:url value="producto.htm?cod_prod=${producto.cod_prod}&cod_cat=${producto.cod_cat_id}"/>">
+                                                <c:out value="${producto.producto}"/>
+                                            </a></td>
+                                    </c:if>
+                                </c:forEach>
+                                <td><c:out value="${compra.cantidad}"/></td>
+                                <td>S/.<c:out value="${compra.monto}"/></td>
                                 <td>
                                     <a href=""
                                        class="btn btn-primary">Editar</a>
