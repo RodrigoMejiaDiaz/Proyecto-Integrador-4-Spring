@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
               crossorigin="anonymous">
-        <title>Agregar producto</title>
+        <title>Editar producto</title>
     </head>
     <body>
         <div class="sticky-top">
@@ -115,6 +115,7 @@
                 </div> 
                 <div class="form-group row">
                     <form:label path="image" cssClass="col-sm-2 col-form-label">Imagen:</form:label>
+                    <form:hidden path="image" value="${productos.getImage() }" />
                     <div class="col-sm-10">
                         <div class="custom-file">
                             <input type="file" name="file" class="custom-file-input" id="customFile"/>

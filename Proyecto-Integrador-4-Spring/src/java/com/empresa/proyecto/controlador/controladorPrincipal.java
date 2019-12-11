@@ -551,7 +551,6 @@ public class controladorPrincipal {
             HttpServletRequest request
     ) throws IOException, ServletException{
         String id = request.getParameter("id");
-        String savePath = "C:\\Users\\Rodrigo\\Documents\\NetBeansProjects\\Proyecto-Integrador-4-Spring\\Proyecto-Integrador-4-Spring\\web" + File.separator + SAVE_DIR_PROD;
         Part part = request.getPart("file");
         String fileName = extractFileName(part);
         String imageInDB = SAVE_DIR_PROD + File.separator + fileName;
