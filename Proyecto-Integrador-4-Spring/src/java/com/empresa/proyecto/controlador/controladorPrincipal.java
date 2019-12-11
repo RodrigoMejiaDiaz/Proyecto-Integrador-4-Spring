@@ -466,7 +466,7 @@ public class controladorPrincipal {
     
     @RequestMapping(value = "agregar-productos", method = RequestMethod.GET)
     public ModelAndView agregar_productos(){
-        ModelAndView mvc = new ModelAndView();
+        ModelAndView mvc = new ModelAndView("agregar-productos");
         List cat = this.listaCategorias();
         mvc.addObject("cat", cat);
         mvc = this.añadirUsuarioMVC(mvc);
@@ -483,27 +483,39 @@ public class controladorPrincipal {
     }
     
     @RequestMapping(value = "resultado-agregar-productos.htm", method = RequestMethod.POST)
-    public ModelAndView resultado_agregar_productos(@ModelAttribute productoDTO d,HttpServletRequest request) throws IOException, ServletException{
-        conexion xcon = new conexion();
-        String cod_prod = xcon.generarCodigo("tienda_producto", "cod_prod");
-        
-        String savePath = "C:\\Users\\Rodrigo\\Documents\\NetBeansProjects\\Proyecto-Integrador-4-Spring\\Proyecto-Integrador-4-Spring\\web" + File.separator + SAVE_DIR_PROD;
-        Part part = request.getPart("file");
-        String fileName = extractFileName(part);
-        String imageInDB = SAVE_DIR_PROD+ File.separator +fileName;
-        if (!fileName.isEmpty()) {
-            part.write(fileName);
+    public ModelAndView resultado_agregar_productos(
+            HttpServletRequest request, @Valid @ModelAttribute("productos") productoDTO d,BindingResult rpta
+    ) throws IOException, ServletException{
+        if(rpta.hasErrors()){
+            ModelAndView mav = new ModelAndView("agregar-productos");
+            List cat = this.listaCategorias();
+            mav.addObject("cat", cat);
+            mav = this.añadirUsuarioMVC(mav);
+            String sql = "SELECT * FROM tienda_proveedor";
+            List proveedores = this.plantillaJDBC.queryForList(sql);
+            mav.addObject("proveedores", proveedores);
+            return mav;
         } else {
-            imageInDB = d.getImage();
+            conexion xcon = new conexion();
+            String cod_prod = xcon.generarCodigo("tienda_producto", "cod_prod");
+
+            Part part = request.getPart("file");
+            String fileName = extractFileName(part);
+            String imageInDB = SAVE_DIR_PROD + File.separator + fileName;
+            if (!fileName.isEmpty()) {
+                part.write(fileName);
+            } else {
+                imageInDB = d.getImage();
+            }
+
+            this.plantillaJDBC.update(
+                    "INSERT INTO tienda_producto (cod_prod, producto,descripcion,precio,stock,"
+                    + "estado,cod_cat_id, cod_prov_id, image, destacado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    cod_prod, d.getProducto(), d.getDescripcion(), d.getPrecio(), d.getStock(), d.getEstado(),
+                    d.getCod_cat_id(), d.getCod_prov_id(), imageInDB, d.getDestacado()
+            );
+            return new ModelAndView("redirect:/admin-productos.htm");
         }
-        
-        this.plantillaJDBC.update(
-                "INSERT INTO tienda_producto (cod_prod, producto,descripcion,precio,stock,"
-                + "estado,cod_cat_id, cod_prov_id, image, destacado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-                cod_prod, d.getProducto(), d.getDescripcion(), d.getPrecio(), d.getStock(), d.getEstado(), 
-                d.getCod_cat_id(), d.getCod_prov_id(), imageInDB, d.getDestacado()
-        );
-        return new ModelAndView("redirect:/admin-productos.htm");
     }
     
     private String extractFileName(Part part){
@@ -528,7 +540,7 @@ public class controladorPrincipal {
      
     @RequestMapping(value = "editar-producto", method = RequestMethod.GET)
     public ModelAndView editar_producto(HttpServletRequest request){
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("editar-producto");
         List cat = this.listaCategorias();
         mav.addObject("cat", cat);
         mav = this.añadirUsuarioMVC(mav);
@@ -547,9 +559,19 @@ public class controladorPrincipal {
     
     @RequestMapping(value = "editar-producto", method = RequestMethod.POST)
     public ModelAndView editar_producto(
-            @ModelAttribute("productos") productoDTO d,
-            HttpServletRequest request
+            HttpServletRequest request, @Valid @ModelAttribute("productos") productoDTO d,
+            BindingResult rpta
     ) throws IOException, ServletException{
+        if(rpta.hasErrors()){
+            ModelAndView mav = new ModelAndView("editar-producto");
+            List cat = this.listaCategorias();
+            mav.addObject("cat", cat);
+            mav = this.añadirUsuarioMVC(mav);
+            String sql = "SELECT * FROM tienda_proveedor";
+            List proveedores = this.plantillaJDBC.queryForList(sql);
+            mav.addObject("proveedores", proveedores);
+            return mav;
+        } else {
         String id = request.getParameter("id");
         Part part = request.getPart("file");
         String fileName = extractFileName(part);
@@ -566,6 +588,7 @@ public class controladorPrincipal {
                 d.getCod_cat_id(), d.getCod_prov_id(), imageInDB, d.getDestacado(), id
         );
         return new ModelAndView("redirect:/admin-productos.htm");
+        }
     }
     
     @RequestMapping(value = "admin-categorias")

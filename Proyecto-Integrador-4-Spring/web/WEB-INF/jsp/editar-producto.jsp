@@ -99,18 +99,21 @@
                     <form:label path="producto" cssClass="col-sm-2 col-form-label">Nombre de producto:</form:label>
                     <div class="col-sm-10">
                     <form:input path="producto" type="text"  cssClass="form-control"/>
+                    <form:errors path="producto" style="color:red;" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <form:label path="descripcion" cssClass="col-sm-2 col-form-label">Descripción:</form:label>
                     <div class="col-sm-10">
                     <form:input path="descripcion" type="text"  cssClass="form-control"/>
+                    <form:errors path="descripcion" style="color:red;" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <form:label path="precio" cssClass="col-sm-2 col-form-label">Precio:</form:label>
                     <div class="col-sm-10">
                     <form:input path="precio" type="number"  cssClass="form-control"/>
+                    <form:errors path="precio" style="color:red;" />
                     </div>
                 </div> 
                 <div class="form-group row">
@@ -127,6 +130,7 @@
                     <form:label path="stock" cssClass="col-sm-2 col-form-label">Stock:</form:label>
                     <div class="col-sm-10">
                     <form:input path="stock" type="number"  cssClass="form-control"/>
+                    <form:errors path="stock" style="color:red;" />
                     </div>
                 </div>
                 <div class="form-group row">

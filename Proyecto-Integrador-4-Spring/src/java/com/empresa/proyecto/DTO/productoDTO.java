@@ -5,22 +5,36 @@
  */
 package com.empresa.proyecto.DTO;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  *
  * @author Rodrigo
  */
 public class productoDTO {
     private String cod_prod;
+    
+    @NotEmpty(message = "Este campo no puede ser nulo")
     private String producto;
+    
+    @NotEmpty(message = "Este campo no puede ser nulo")
     private String descripcion;
+    
+    @NotNull(message = "Este campo no puede ser nulo")
     private int precio;
+    
+    @NotNull(message = "Este campo no puede ser nulo")
     private int stock;
-    private String estado;
+    
+    private String estado;  
     private int cod_cat_id;
     private int cod_prov_id;
-    private String image;
-    private String[] seleccionEstado = {"A", "X"};
+    private String image; 
     private String destacado;
+    
+    private String[] seleccionEstado = {"A", "X"};
 
     public productoDTO(String cod_prod, String producto, String descripcion, 
             int precio, int stock, String estado, int cod_cat_id, 
