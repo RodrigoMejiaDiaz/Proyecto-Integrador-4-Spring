@@ -1,6 +1,6 @@
 <%-- 
-    Document   : agregar-productos
-    Created on : Dec 10, 2019, 5:02:01 PM
+    Document   : editar-producto
+    Created on : Dec 10, 2019, 8:17:37 PM
     Author     : Rodrigo
 --%>
 
@@ -64,24 +64,15 @@
                             <img src="images/search.svg" /> 
                         </button>
                     </form>
-                    <c:choose>
-                        <c:when test="${username == 'anonymousUser'}">
-                            <button class="btn" type="button">
-                                <a href="login.htm"><img src="images/user.svg" /></a>
-                            </button> 
-                        </c:when>
-                        <c:otherwise>
-                            <div class="dropdown">
-                                <button class="btn btn-outline-secondary mx-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="images/user.svg" />
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Perfil</a>
-                                    <a class="dropdown-item" href="salir.htm">Cerrar Sesión</a>
-                                </div>
-                            </div>
-                        </c:otherwise>
-                    </c:choose>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary mx-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="images/user.svg" />
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Perfil</a>
+                            <a class="dropdown-item" href="salir.htm">Cerrar Sesión</a>
+                        </div>
+                    </div>   
                     <a href="carro.htm" class="mx-2" id="dropdownMenuButton">
                         <img src="images/shopping-cart.svg" />
                     </a>
@@ -102,8 +93,8 @@
         </div>
         
         <div class="container">
-            <h1>Añadir producto</h1>
-            <form:form enctype="multipart/form-data" method="post" commandName="productos" action="resultado-agregar-productos.htm">
+            <h1>Editar producto</h1>
+            <form:form enctype="multipart/form-data" method="post" commandName="productos">
                 <div class="form-group row">
                     <form:label path="producto" cssClass="col-sm-2 col-form-label">Nombre de producto:</form:label>
                     <div class="col-sm-10">
@@ -174,10 +165,11 @@
                     </div>
                 </div>
                     <div class="form-group">
-                        <input type="submit" value="Enviar" class="btn btn-primary"/>
+                        <input type="submit" value="Editar" class="btn btn-primary"/>
                         <a href="admin-productos.htm" class="btn btn-primary">Volver</a>
                     </div>
             </form:form>
         </div>
     </body>
 </html>
+

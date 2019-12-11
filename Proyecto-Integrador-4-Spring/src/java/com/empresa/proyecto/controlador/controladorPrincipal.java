@@ -181,24 +181,25 @@ public class controladorPrincipal {
        return mvc;
    }
    
-   public productoDTO seleccionarProducto(String cod_prod){
-       final productoDTO producto = new productoDTO();
-       String sql = "SELECT * FROM tienda_producto WHERE cod_prod=" + cod_prod;
-       return (productoDTO) plantillaJDBC.query(sql, (ResultSet rs) -> {
-           if (rs.next()) {
-               producto.setCod_prod(rs.getString("cod_prod"));
-               producto.setProducto(rs.getString("producto"));
-               producto.setDescripcion(rs.getString("descripcion"));
-               producto.setPrecio(Integer.parseInt(rs.getString("precio")));
-               producto.setStock(Integer.parseInt(rs.getString("stock")));
-               producto.setCod_prov_id(Integer.parseInt(rs.getString("cod_prov_id")));
-               producto.setDestacado(rs.getString("destacado"));
-               producto.setCod_cat_id(Integer.parseInt(rs.getString("cod_cat_id")));
-               producto.setImage(rs.getString("image"));
-           }
-           return producto;
-       });
-   }
+    public productoDTO seleccionarProducto(String id) {
+        final productoDTO productos = new productoDTO();
+        String sql = "SELECT * FROM tienda_producto WHERE cod_prod=" + id;
+        return (productoDTO) plantillaJDBC.query(sql, (ResultSet rs) -> {
+            if (rs.next()) {
+                productos.setCod_prod(rs.getString("cod_prod"));
+                productos.setProducto(rs.getString("producto"));
+                productos.setDescripcion(rs.getString("descripcion"));
+                productos.setPrecio(Integer.parseInt(rs.getString("precio")));
+                productos.setStock(Integer.parseInt(rs.getString("stock")));
+                productos.setEstado(rs.getString("estado"));
+                productos.setCod_cat_id(Integer.parseInt(rs.getString("cod_cat_id")));
+                productos.setCod_prov_id(Integer.parseInt(rs.getString("cod_prov_id")));
+                productos.setImage(rs.getString("image"));
+                productos.setDestacado(rs.getString("destacado"));
+            }
+            return productos;
+        });
+    }
    
    public List listaCategorias(){
        String sql = "SELECT * FROM tienda_categoria_producto";
@@ -520,7 +521,45 @@ public class controladorPrincipal {
                 + "cod_prod=?", id);
         return new ModelAndView("redirect:/admin-productos.htm");
     }
+     
+    @RequestMapping(value = "editar-producto", method = RequestMethod.GET)
+    public ModelAndView editar_producto(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        List cat = this.listaCategorias();
+        mav.addObject("cat", cat);
+        mav = this.añadirUsuarioMVC(mav);
+        String sql = "SELECT * FROM tienda_proveedor";
+        List proveedores = this.plantillaJDBC.queryForList(sql);
+        mav.addObject("proveedores", proveedores);
+        
+        String id = request.getParameter("id");
+        productoDTO productos = this.seleccionarProducto(id);
+        mav.addObject("productos", new productoDTO(id, productos.getProducto(), productos.getDescripcion(),
+        productos.getPrecio(), productos.getStock(), productos.getEstado(), productos.getCod_cat_id(),
+        productos.getCod_prov_id(), productos.getImage(), productos.getDestacado()));
+        mav.setViewName("editar-producto");
+        return mav;
+    }
     
+    @RequestMapping(value = "editar-producto", method = RequestMethod.POST)
+    public ModelAndView editar_producto(
+            @ModelAttribute("productos") productoDTO d,
+            HttpServletRequest request
+    ) throws IOException, ServletException{
+        String id = request.getParameter("id");
+        String savePath = "C:\\Users\\Rodrigo\\Documents\\NetBeansProjects\\Proyecto-Integrador-4-Spring\\Proyecto-Integrador-4-Spring\\web" + File.separator + SAVE_DIR_PROD;
+        Part part = request.getPart("file");
+        String fileName = extractFileName(part);
+        part.write(fileName);
+        String imageInDB = SAVE_DIR_PROD + File.separator + fileName;
+        this.plantillaJDBC.update(
+                "UPDATE tienda_producto SET producto=?, descripcion=?, precio=?, stock=?,"
+                + "estado=?, cod_cat_id=?, cod_prov_id=?, image=?, destacado=? WHERE cod_prod=?",
+                d.getProducto(), d.getDescripcion(), d.getPrecio(), d.getStock(), d.getEstado(),
+                d.getCod_cat_id(), d.getCod_prov_id(), imageInDB, d.getDestacado(), id
+        );
+        return new ModelAndView("redirect:/admin-productos.htm");
+    }
     
     @RequestMapping(value = "admin-categorias")
     public ModelAndView admin_categorias(){
