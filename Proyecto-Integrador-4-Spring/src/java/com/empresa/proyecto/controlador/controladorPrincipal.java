@@ -490,8 +490,12 @@ public class controladorPrincipal {
         String savePath = "C:\\Users\\Rodrigo\\Documents\\NetBeansProjects\\Proyecto-Integrador-4-Spring\\Proyecto-Integrador-4-Spring\\web" + File.separator + SAVE_DIR_PROD;
         Part part = request.getPart("file");
         String fileName = extractFileName(part);
-        part.write(fileName);
         String imageInDB = SAVE_DIR_PROD+ File.separator +fileName;
+        if (!fileName.isEmpty()) {
+            part.write(fileName);
+        } else {
+            imageInDB = d.getImage();
+        }
         
         this.plantillaJDBC.update(
                 "INSERT INTO tienda_producto (cod_prod, producto,descripcion,precio,stock,"
@@ -550,8 +554,12 @@ public class controladorPrincipal {
         String savePath = "C:\\Users\\Rodrigo\\Documents\\NetBeansProjects\\Proyecto-Integrador-4-Spring\\Proyecto-Integrador-4-Spring\\web" + File.separator + SAVE_DIR_PROD;
         Part part = request.getPart("file");
         String fileName = extractFileName(part);
-        part.write(fileName);
         String imageInDB = SAVE_DIR_PROD + File.separator + fileName;
+        if(!fileName.isEmpty()){
+            part.write(fileName);
+        } else {
+            imageInDB = d.getImage();
+        }
         this.plantillaJDBC.update(
                 "UPDATE tienda_producto SET producto=?, descripcion=?, precio=?, stock=?,"
                 + "estado=?, cod_cat_id=?, cod_prov_id=?, image=?, destacado=? WHERE cod_prod=?",
