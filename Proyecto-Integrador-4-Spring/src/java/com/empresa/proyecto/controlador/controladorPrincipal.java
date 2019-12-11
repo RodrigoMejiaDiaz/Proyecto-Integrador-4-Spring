@@ -421,14 +421,18 @@ public class controladorPrincipal {
             mav.addObject("cat", cat);
             return mav;
         } else {
+            conexion xcon = new conexion();
+            String cod_user = xcon.generarCodigo("tienda_usuario", "cod_user");
             this.plantillaJDBC.update(
-                    "INSERT INTO tienda_usuario (username,password,correo,enabled,nombre,"
+                    "INSERT INTO tienda_usuario (cod_user, username,password,correo,enabled,nombre,"
                             + "apellido,fec_nac, sexo, compania, telefono, direccion, "
                             + "cod_ciud_id, estado) "
-                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?)", d.getUsername(),d.getPassword(),
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", cod_user,d.getUsername(),d.getPassword(),
                     d.getCorreo(), 1, d.getNombre(), d.getApellido(), d.getFec_nac(), d.getSexo(),
                     d.getCompania(), d.getTelefono(), d.getDireccion(), 1, "A"
             );
+            this.plantillaJDBC.update("INSERT INTO tienda_roles (codigo_usuario, rolename) "
+                    + "VALUES (?,?)", cod_user, "ROLE_Usuario");
             return new ModelAndView("redirect:/registrarseCompleto.htm");
         }
     }
