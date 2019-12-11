@@ -12,6 +12,8 @@ import com.empresa.proyecto.DTO.productoDTO;
 import com.empresa.proyecto.DTO.usuarioDTO;
 import com.empresa.proyecto.clases.conexion;
 import com.empresa.proyecto.modelo.productoDTOModelo;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -21,9 +23,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import javax.validation.Valid;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -46,9 +51,14 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author Rodrigo
  */
+@MultipartConfig(fileSizeThreshold=1024*1024*2,
+                 maxFileSize=1024*1024*10,
+                 maxRequestSize=1024*1024*50)
 @Controller
 public class controladorPrincipal {
     private JdbcTemplate plantillaJDBC;
+    private static final String SAVE_DIR_PROD = "images";
+
     
     public controladorPrincipal(){
         conexion xcon = new conexion();
@@ -469,6 +479,40 @@ public class controladorPrincipal {
         mvc.setViewName("agregar-productos");
         
         return mvc;        
+    }
+    
+    @RequestMapping(value = "resultado-agregar-productos.htm", method = RequestMethod.POST)
+    public ModelAndView resultado_agregar_productos(@ModelAttribute productoDTO d,HttpServletRequest request) throws IOException, ServletException{
+        
+        ModelAndView mvc = new ModelAndView("resultado");
+        conexion xcon = new conexion();
+        String cod_prod = xcon.generarCodigo("tienda_producto", "cod_prod");
+        
+        String savePath = "C:\\Users\\Rodrigo\\Documents\\NetBeansProjects\\Proyecto-Integrador-4-Spring\\Proyecto-Integrador-4-Spring\\web" + File.separator + SAVE_DIR_PROD;
+        File fileSaveDir = new File(savePath);
+        Part part = request.getPart("file");
+        String fileName = extractFileName(part);
+        part.write(fileName);
+        String imageInDB = SAVE_DIR_PROD+ File.separator +fileName;
+        
+        this.plantillaJDBC.update(
+                "INSERT INTO tienda_producto (cod_prod, producto,descripcion,precio,stock,"
+                + "estado,cod_cat_id, cod_prov_id, image, destacado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+                cod_prod, d.getProducto(), d.getDescripcion(), d.getPrecio(), d.getStock(), d.getEstado(), 
+                d.getCod_cat_id(), d.getCod_prov_id(), imageInDB, d.getDestacado()
+        );
+        return new ModelAndView("redirect:/admin-productos.htm");
+    }
+    
+    private String extractFileName(Part part){
+        String contentDisp = part.getHeader("content-disposition");
+        String[] items = contentDisp.split(";");
+        for (String s : items){
+            if (s.trim().startsWith("filename")) {
+                return s.substring(s.indexOf("=")+2, s.length()-1);
+            }
+        }
+        return "";
     }
     
     

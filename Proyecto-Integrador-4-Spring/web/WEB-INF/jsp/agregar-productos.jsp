@@ -103,13 +103,7 @@
         
         <div class="container">
             <h1>Añadir producto</h1>
-            <form:form method="post" commandName="productos">
-                <div class="form-group row">
-                    <form:label path="cod_prod" for="inputEmail3" cssClass="col-sm-2 col-form-label">Código de categoría:</form:label>
-                    <div class="col-sm-10">
-                    <form:input type="number" path="cod_prod" cssClass="form-control"/>
-                    </div>
-                </div>
+            <form:form enctype="multipart/form-data" method="post" commandName="productos" action="resultado-agregar-productos.htm">
                 <div class="form-group row">
                     <form:label path="producto" cssClass="col-sm-2 col-form-label">Nombre de producto:</form:label>
                     <div class="col-sm-10">
@@ -127,7 +121,16 @@
                     <div class="col-sm-10">
                     <form:input path="precio" type="number"  cssClass="form-control"/>
                     </div>
-                </div>    
+                </div> 
+                <div class="form-group row">
+                    <form:label path="image" cssClass="col-sm-2 col-form-label">Imagen:</form:label>
+                    <div class="col-sm-10">
+                        <div class="custom-file">
+                            <input type="file" name="file" class="custom-file-input" id="customFile"/>
+                            <label class="custom-file-label" for="customFile">Escoger una imagen</label>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group row">
                     <form:label path="stock" cssClass="col-sm-2 col-form-label">Stock:</form:label>
                     <div class="col-sm-10">
